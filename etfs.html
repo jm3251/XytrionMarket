@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#6366F1',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: {
+                            100: '#374151',
+                            200: '#1F2937',
+                            300: '#111827',
+                            400: '#0F172A',
+                            500: '#0B1120',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Alpine.js x-cloak directive */
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Custom scrollbar for dark mode */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        /* Form elements styling */
+
+        .form-input {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .form-select {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .btn-primary {
+            @apply bg-primary hover: bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        .btn-secondary {
+            @apply bg-dark-100 hover: bg-dark-200 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        /* Navbar and mobile menu animations */
+
+        .navbar-dropdown {
+            @apply transition-all duration-300 ease-in-out transform origin-top;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Light mode overrides */
+
+        html:not(.dark) {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) body {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) .bg-dark-400 {
+            @apply bg-white;
+        }
+
+        html:not(.dark) .bg-dark-300 {
+            @apply bg-gray-50;
+        }
+
+        html:not(.dark) .border-gray-800 {
+            @apply border-gray-200;
+        }
+
+        html:not(.dark) .text-gray-200,
+        html:not(.dark) .text-gray-300,
+        html:not(.dark) .text-gray-400 {
+            @apply text-gray-700;
+        }
+
+        html:not(.dark) .hover\:bg-dark-200:hover,
+        html:not(.dark) .hover\:bg-gray-700:hover {
+            @apply hover: bg-gray-200;
+        }
+
+        html:not(.dark) .bg-dark-500 {
+            @apply bg-gray-100;
+        }
+    </style>
+
+    <title>XYTRION MARKETS | CFD Trading — Trading on Stocks, Gold, Oil, Indices</title>
+    <link rel="manifest" href="./">
+    <meta name="theme-color" content="#111827">
+    <meta property="x-session-id" content="ghJjEOrjZ3KUPun1UQksVUbvK88y21dgIhKtb8GT">
+    <meta property="og:site_name" content="XYTRION MARKETS">
+    <meta property="og:description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="keywords" content="forex, CFDs, CFD, Bitcoin trading, crypto trading, online trading, Forex trading, Oil trading, Gold trading, trading indexes, shares trading, commodities trading, trading platform, Cryptocurrencies day trading">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CFD Trading — Trading on Stocks, Gold, Oil, Indices | XYTRION MARKETS">
+    <meta property="og:image" content="img/share.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/storage/app/public/photos/LwmPzjLpWvqARLQerBqGjF6TGPAaVzudiJtGU1Is.png" type="image/x-icon">
+
+    <!-- Preload key assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- jQuery (required for some components) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript utilities -->
+    <script>
+        // Utility function for mobile menu
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('navigation', {
+                open: false,
+                toggle() {
+                    this.open = !this.open;
+                },
+                close() {
+                    this.open = false;
+                }
+            });
+
+            // Theme toggler
+            Alpine.store('darkMode', {
+                on: true,
+                toggle() {
+                    this.on = !this.on;
+                    if (this.on) {
+                        document.documentElement.classList.add('dark');
+                        document.body.classList.add('bg-gray-900');
+                        document.body.classList.remove('bg-gray-100');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.body.classList.remove('bg-gray-900');
+                        document.body.classList.add('bg-gray-100');
+                    }
+                    localStorage.setItem('darkMode', this.on ? 'dark' : 'light');
+                }
+            });
+        });
+
+        // Initialize theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const theme = localStorage.getItem('darkMode');
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('bg-gray-900');
+                document.body.classList.add('bg-gray-100');
+                if (window.Alpine) {
+                    Alpine.store('darkMode').on = false;
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/dashboard/chat-widget.css">
+</head>
+
+<body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:bg-blue-700 focus:text-white focus:fixed focus:px-4 focus:py-2 focus:top-2 focus:left-2 focus:z-50">
+        Skip to main content
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Header -->
+    <header class="bg-gray-900 border-b border-gray-800 relative z-50">
+        <!-- Top Navigation Bar -->
+        <div x-data="{ mobileMenuOpen: false }" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center justify-start leading-none">
+                        <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                    </a>
+                    </div>
+
+                    <!-- Main Navigation - Desktop -->
+                    <nav class="hidden md:flex space-x-8">
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Trading</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Cryptocurrencies</a>
+                                <a href="forex" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Forex</a>
+                                <a href="shares" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Shares</a>
+                                <a href="indices" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Indices</a>
+                                <a href="etfs" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">ETFs</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>System</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="trade" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Trade</a>
+                                <a href="copy" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Copy Trading</a>
+                                <a href="automate" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Automated Trading</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Company</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="about" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">About Us</a>
+                                <a href="why-us" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Why Us</a>
+                                <a href="faq" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">FAQ</a>
+                                <a href="regulation" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Legal & Regulation</a>
+                            </div>
+                        </div>
+
+                        <a href="for-traders" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Education</a>
+                        <a href="contacts" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Contact</a>
+                    </nav>
+
+                    <!-- Right Navigation -->
+                    <div class="hidden md:flex items-center">
+                        <div class="flex space-x-1 mr-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Desktop Version">
+                            <i class="fas fa-desktop"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Windows App">
+                            <i class="fab fa-windows"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Android App">
+                            <i class="fab fa-android"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="iOS App">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                        </div>
+
+                        <!-- Language Selector (Desktop) -->
+
+
+                        <!-- Dark/Light Mode Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-gray-200 mr-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon"></i>-->
+                        <!--</button>-->
+
+                        <div class="flex items-center space-x-4">
+                            <a href="login" class="text-gray-200 hover:text-white flex items-center">
+                            <i class="fas fa-lock mr-1"></i>
+                            <span>Log in</span>
+                        </a>
+                            <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            Sign up
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button and theme toggle -->
+                    <div class="flex md:hidden items-center space-x-2">
+                        <!-- Mobile Theme Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun text-lg"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon text-lg"></i>-->
+                        <!--</button>-->
+
+                        <!-- Mobile Menu Toggle -->
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu"
+                            aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenuOpen" class="md:hidden" id="mobile-menu" style="display: none;">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <!-- Mobile Navigation -->
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Trading</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Cryptocurrencies</a>
+                            <a href="forex" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Forex</a>
+                            <a href="shares" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Shares</a>
+                            <a href="indices" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Indices</a>
+                            <a href="etfs" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">ETFs</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>System</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="trade" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Trade</a>
+                            <a href="copy" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Copy Trading</a>
+                            <a href="automate" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Automated Trading</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Company</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">About Us</a>
+                            <a href="why-us" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Why Us</a>
+                            <a href="faq" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">FAQ</a>
+                            <a href="regulation" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Legal & Regulation</a>
+                        </div>
+                    </div>
+
+                    <a href="for-traders" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Education</a>
+                    <a href="contacts" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Contact</a>
+
+                    <!-- Language Selector (Mobile) -->
+
+                    <div class="pt-4 pb-3 border-t border-gray-700">
+                        <div class="flex items-center justify-between px-4">
+                            <div class="flex items-center space-x-3">
+                                <a href="login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-lock mr-1"></i> Log in
+                            </a>
+                                <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Sign up
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--  sub menu -->
+
+    <!-- Market Ticker Widget -->
+    <div class="bg-dark-300 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+            <div class="py-0">
+                <div class="crypto-ticker-wrapper-">
+                    <!-- <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no"
+                        width="100%"
+                        height="36px"
+                        scrolling="auto"
+                        marginwidth="0"
+                        marginheight="0"
+                        frameborder="0"
+                        border="0"
+                        class="w-full">
+                </iframe>-->
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                            {
+                                "symbols": [{
+                                        "proName": "FOREXCOM:SPXUSD",
+                                        "title": "S&P 500"
+                                    },
+                                    {
+                                        "proName": "FOREXCOM:NSXUSD",
+                                        "title": "Nasdaq 100"
+                                    },
+                                    {
+                                        "proName": "FX_IDC:EURUSD",
+                                        "title": "EUR/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:BTCUSD",
+                                        "title": "BTC/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:ETHUSD",
+                                        "title": "ETH/USD"
+                                    }
+                                ],
+                                "showSymbolLogo": true,
+                                "colorTheme": "dark",
+                                "isTransparent": true,
+                                "displayMode": "adaptive",
+                                "locale": "en"
+                            }
+                        </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+            <!-- Abstract Background Elements -->
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+                <!-- Abstract Financial Chart Pattern -->
+                <div class="absolute top-0 right-0 w-full h-full">
+                    <svg class="absolute top-0 right-0 w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="etfGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop stop-color="#3B82F6" stop-opacity=".25" offset="0%"/>
+                        <stop stop-color="#10B981" stop-opacity=".2" offset="50%"/>
+                        <stop stop-color="#6366F1" stop-opacity=".15" offset="100%"/>
+                    </linearGradient>
+                </defs>
+                <!-- ETF Chart-inspired shape -->
+                <path fill="url(#etfGrad1)" d="M50,250 L150,200 L250,300 L350,150 L450,250 L550,100 L650,200 L750,150" stroke-width="3" stroke="rgba(59, 130, 246, 0.5)" fill="none"/>
+                <path fill="url(#etfGrad1)" d="M50,450 L750,450" stroke-width="1" stroke="rgba(59, 130, 246, 0.2)" fill="none"/>
+                <path fill="url(#etfGrad1)" d="M50,350 L750,350" stroke-width="1" stroke="rgba(59, 130, 246, 0.2)" fill="none"/>
+                <path fill="url(#etfGrad1)" d="M50,550 L750,550" stroke-width="1" stroke="rgba(59, 130, 246, 0.2)" fill="none"/>
+            </svg>
+                </div>
+                <!-- Network Connections -->
+                <div class="absolute inset-0">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#6366F1" stroke-width="2" opacity="0.15">
+                    <path d="M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737M490 85L309 538 40 599 295 764"/>
+                </g>
+            </svg>
+                </div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 px-4 py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-2/3 mb-8 lg:mb-0" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 200)">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0" class="space-y-6">
+                            <div class="inline-block px-3 py-1 mb-2 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                                Investment Products
+                            </div>
+                            <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                                <span class="block">Exchange-Traded Funds</span>
+                                <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Diversified Investment Solutions</span>
+                            </h1>
+                            <p class="mt-3 text-lg text-gray-300 max-w-2xl">
+                                An exchange-traded fund is a type of investment fund and exchange-traded product, i.e. they are traded on stock exchanges. ETFs are similar in many ways to mutual funds, except that ETFs are bought and sold throughout the day on stock exchanges while
+                                mutual funds are bought and sold based on their price at day's end.
+                            </p>
+                            <div class="flex flex-wrap gap-4 mt-6">
+                                <a href="#etf-markets" class="px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+                            Explore ETFs
+                        </a>
+                                <a href="/register" class="px-6 py-3 text-base font-medium text-gray-300 bg-gray-800 border border-gray-700 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+                            Start Trading
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/3" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 500)">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-500 delay-300" x-transition:enter-start="opacity-0 transform translate-y-12" x-transition:enter-end="opacity-100 transform translate-y-0" class="relative">
+                            <!-- ETF Performance Cards -->
+                            <div class="grid gap-4">
+                                <!-- S&P 500 ETF -->
+                                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4 rounded-xl border border-gray-700 transform hover:translate-y-[-5px] transition-all duration-300">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="text-lg font-bold text-white">S&P 500 ETF</h3>
+                                            <p class="text-sm text-gray-400">Tracks the S&P 500 Index</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-green-400 font-medium">+1.2%</div>
+                                            <div class="text-xs text-gray-400">Today</div>
+                                        </div>
+                                    </div>
+                                    <!-- Mini Chart -->
+                                    <div class="mt-3 h-10">
+                                        <svg class="w-full h-full" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0,15 L10,12 L20,18 L30,15 L40,20 L50,14 L60,16 L70,10 L80,15 L90,13 L100,8" fill="none" stroke="#10B981" stroke-width="2"/>
+                                </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Technology Sector ETF -->
+                                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4 rounded-xl border border-gray-700 transform hover:translate-y-[-5px] transition-all duration-300">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 class="text-lg font-bold text-white">Tech Sector ETF</h3>
+                                            <p class="text-sm text-gray-400">Technology companies</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-green-400 font-medium">+2.5%</div>
+                                            <div class="text-xs text-gray-400">Today</div>
+                                        </div>
+                                    </div>
+                                    <!-- Mini Chart -->
+                                    <div class="mt-3 h-10">
+                                        <svg class="w-full h-full" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0,20 L10,18 L20,15 L30,16 L40,12 L50,10 L60,8 L70,5 L80,7 L90,3 L100,5" fill="none" stroke="#10B981" stroke-width="2"/>
+                                </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Decorative Elements -->
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                            <div class="absolute -top-6 -left-6 w-24 h-24 bg-purple-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF Markets Table Section -->
+        <section id="etf-markets" class="py-16 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Available ETFs
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">ETF Markets</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Trade a wide range of Exchange-Traded Funds with competitive spreads and advanced tools
+                    </p>
+                </div>
+
+                <!-- ETF Categories -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                    <!-- Category 1 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-400 transition-all duration-300">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Index ETFs</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">Track major market indices like S&P 500, NASDAQ, and Dow Jones</p>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-400 transition-all duration-300">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Sector ETFs</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">Focus on specific sectors like Technology, Healthcare, and Energy</p>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-400 transition-all duration-300">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">International ETFs</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">Access global markets including emerging markets and developed economies</p>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-blue-400 transition-all duration-300">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Thematic ETFs</h3>
+                        </div>
+                        <p class="text-gray-400 text-sm">Focus on specific themes like Clean Energy, AI, Cybersecurity, and more</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden shadow-lg">
+                    <!-- Search and Filter Controls -->
+                    <div class="p-4 border-b border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="relative w-full md:w-64">
+                            <input type="text" class="search-box w-full bg-gray-900 border border-gray-700 rounded-lg py-2 px-4 pl-10 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search ETFs...">
+                            <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <select class="selfi bg-gray-900 border border-gray-700 rounded-lg py-2 px-4 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="All">All ETFs</option>
+                        <option value="Index">Index ETFs</option>
+                        <option value="Sector">Sector ETFs</option>
+                        <option value="International">International ETFs</option>
+                        <option value="Thematic">Thematic ETFs</option>
+                    </select>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+                        Filter
+                    </button>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="relative overflow-x-auto pat loading" style="min-height: 400px;">
+                        <div class="loader absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full animate-spin border-4 border-solid border-blue-500 border-t-transparent"></div>
+                        </div>
+                        <div class="w-full">
+                            <table id="tt-spreads-6023e31647d95" class="w-full text-sm text-left text-gray-300">
+                                <thead class="text-xs uppercase bg-gray-800 text-gray-400">
+                                    <tr>
+                                        <th class="px-6 py-3">Symbol</th>
+                                        <th class="px-6 py-3">Name</th>
+                                        <th class="px-6 py-3">Price</th>
+                                        <th class="px-6 py-3">24h Change</th>
+                                        <th class="px-6 py-3">Assets Under Management</th>
+                                        <th class="px-6 py-3">Spread</th>
+                                        <th class="px-6 py-3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Table will be populated by DataTable script -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ETF Benefits Section -->
+        <section class="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Why Trade ETFs
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Benefits of ETF Trading</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Discover the advantages of incorporating ETFs into your trading strategy
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Instant Diversification</h3>
+                        <p class="text-gray-300">ETFs provide exposure to a basket of securities in a single trade, reducing risk through diversification across companies, sectors, or even countries.</p>
+                    </div>
+
+                    <!-- Benefit 2 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Cost-Effective</h3>
+                        <p class="text-gray-300">ETFs typically have lower expense ratios compared to mutual funds, making them a cost-effective way to gain exposure to various markets and sectors.</p>
+                    </div>
+
+                    <!-- Benefit 3 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Liquidity & Transparency</h3>
+                        <p class="text-gray-300">ETFs trade like stocks throughout the day, offering high liquidity and real-time pricing transparency not available with mutual funds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script type=text/javascript>
+            $(function() {
+                var $dttble = $('#tt-spreads-6023e31647d95').DataTable({
+                    "scrollY": "50vh",
+                    "scrollCollapse": true,
+                    "responsive": true,
+                    "paging": false,
+                    "ordering": false,
+                    "searching": true,
+                    "language": {
+                        "zeroRecords": "No matching records found"
+                    },
+                    "columnDefs": [{
+                        targets: ['category', 'sub_category'],
+                        visible: false
+                    }],
+                    "drawCallback": function(settings) {
+                        $('.dataTables_scrollHead').css('width', '100%');
+                        $('.dataTables_scrollHeadInner').css('width', '100%');
+                        $('.dataTables_scrollHeadInner').find('.dataTable').css('width', '100%');
+                    },
+                    initComplete: function() {
+                        $('.loader').hide();
+                        $('.pat').removeClass('loading');
+                        $('.search-box').keyup(function() {
+                            $dttble.search(this.value).draw();
+                        });
+                        let index = parseInt('1');
+                        $('.selfi').change(function() {
+                            if (this.value === "All") {
+                                $dttble.column(index).search('').draw();
+                                $('.subselfi option').show();
+                            } else {
+                                $dttble.column(index).search(this.value).draw();
+                                if ('undefined' !== typeof subindex) {
+                                    let id = $(this).find(':selected').attr('data-id');
+                                    $('.subselfi option').hide();
+                                    $('.subselfi option[data-parent="' + id + '"]').show();
+                                }
+                            }
+                            if ('undefined' !== typeof subindex) {
+                                $dttble.column(subindex).search('').draw();
+                                $('.subselfi option[data-parent="all"]').show();
+                                $('.subselfi option[data-parent="all"]').prop('selected', true);
+                            }
+                        });
+                    }
+                });
+
+                var tabs = $('.tabs .tab').on('click', function($event) {
+                    $event.preventDefault();
+                    tabs.removeClass('current');
+                    $(this).addClass('current');
+                    var target = $(this).data('target');
+                    $('.tabs-content .tab-content').css({
+                        'height': 0,
+                        'display': 'none'
+                    }).parent().find('.' + target).css({
+                        'height': '100%',
+                        'display': 'block',
+                    });
+                    $dttble.columns.adjust().draw();
+                    return false;
+                });
+
+                $(window).on('load', function() {
+                    AOS.refresh();
+                    $dttble.columns.adjust().draw();
+                });
+
+                $(window).on('resize', function() {
+                    setTimeout(function() {
+                        AOS.refresh();
+                        $dttble.columns.adjust().draw();
+                    }, 250);
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+        <!-- Features Section -->
+        <section class="py-20 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Trading Flexibility
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Trade what you want,</span>
+                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">When you want</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Our platform provides you with the tools and access you need for successful trading
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Image Column -->
+                    <div class="relative order-2 lg:order-1" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 300)" data-aos="fade-right" data-aos-duration="1200" data-aos-anchor=".tr-cost">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 transform translate-x-8" x-transition:enter-end="opacity-100 transform translate-x-0" class="relative z-10">
+                            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="temp/custom/img/commission-scheme-crypt1t1.png" alt="Trading Platform" class="w-full">
+                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-400 opacity-20"></div>
+                            </div>
+
+                            <!-- Decorative Elements -->
+                            <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-blue-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                            <div class="absolute -top-8 -left-8 w-32 h-32 bg-teal-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                        </div>
+                    </div>
+
+                    <!-- Content Column -->
+                    <div class="space-y-8 order-1 lg:order-2" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 500)">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-700 delay-300" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0">
+                            <h3 class="text-2xl font-bold text-white mb-6">
+                                One of the primary goals of XYTRION MARKETS is to provide the best product in the market. Our relationships with leading tier one financial institutions mean deep liquidity and tighter spreads for Forex traders.
+                            </h3>
+
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                    </div>
+                                    <p class="ml-3 text-lg text-gray-300">
+                                        Trade Forex, Indices, Shares & Commodities
+                                    </p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                    </div>
+                                    <p class="ml-3 text-lg text-gray-300">
+                                        Access global markets 24 hours / 7 days
+                                    </p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                    </div>
+                                    <p class="ml-3 text-lg text-gray-300">
+                                        Multilingual customer support
+                                    </p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <svg class="h-6 w-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                    </div>
+                                    <p class="ml-3 text-lg text-gray-300">
+                                        Trade on the go on our mobile apps
+                                    </p>
+                                </li>
+                            </ul>
+
+                            <div class="mt-8">
+                                <a href="about" title="Learn About XYTRION MARKETS" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 border border-transparent rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 transition-all duration-200">
+                            Learn More
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl overflow-hidden shadow-xl">
+                    <div class="relative px-8 py-12 md:p-12 lg:px-16 lg:py-16">
+                        <!-- Background Pattern -->
+                        <div class="absolute inset-0 overflow-hidden opacity-10">
+                            <svg class="absolute right-0 top-0 h-full" viewBox="0 0 800 800">
+                        <path fill="none" stroke="white" stroke-width="2" d="M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764">
+                        </path>
+                        <path fill="none" stroke="white" stroke-width="2" d="M-4 44L190 190 731 737 520 660 309 538 40 599 295 764">
+                        </path>
+                        <path fill="none" stroke="white" stroke-width="2" d="M-4 44L190 190 731 737M490 85L309 538 40 599 295 764">
+                        </path>
+                    </svg>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="relative z-10 text-center max-w-2xl mx-auto">
+                            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                                Ready to Start Trading ETFs?
+                            </h2>
+                            <p class="mt-4 text-xl text-blue-100">
+                                Join thousands of traders using our platform to access global ETF markets with competitive spreads.
+                            </p>
+                            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                                <a href="register" class="px-8 py-4 text-base font-medium text-blue-900 bg-white border border-transparent rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800 transition-all duration-200">
+                            Create Free Account
+                        </a>
+                                <a href="login" class="px-8 py-4 text-base font-medium text-white bg-transparent border border-white rounded-lg shadow-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-800 transition-all duration-200">
+                            Login
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-400 text-gray-300">
+        <!-- Upper Footer -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Company Info -->
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <a href="/" class="flex items-center justify-start leading-none">
+                                <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                            </a>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-6">
+                                XYTRION MARKETS offers CFD trading on stocks, forex, indices, commodities, and cryptocurrencies with competitive spreads and advanced trading tools.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Twitter</span>
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">LinkedIn</span>
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                                <a href="mailto:support@xytrionmarkets.com" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Email</span>
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="about" class="text-sm text-gray-400 hover:text-white transition">About Us</a></li>
+                                <li><a href="why-us" class="text-sm text-gray-400 hover:text-white transition">Why Choose Us</a></li>
+                                <li><a href="for-traders" class="text-sm text-gray-400 hover:text-white transition">Education</a></li>
+                                <li><a href="contacts" class="text-sm text-gray-400 hover:text-white transition">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Trading -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Trading</h3>
+                            <ul class="space-y-3">
+                                <li><a href="cryptocurrencies" class="text-sm text-gray-400 hover:text-white transition">Cryptocurrencies</a></li>
+                                <li><a href="forex" class="text-sm text-gray-400 hover:text-white transition">Forex</a></li>
+                                <li><a href="shares" class="text-sm text-gray-400 hover:text-white transition">Shares</a></li>
+                                <li><a href="indices" class="text-sm text-gray-400 hover:text-white transition">Indices</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Account -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Your Account</h3>
+                            <ul class="space-y-3">
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Log In</a></li>
+                                <li><a href="register" class="text-sm text-gray-400 hover:text-white transition">Create Account</a></li>
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Demo Account</a></li>
+                                <li><a href="contact" class="text-sm text-gray-400 hover:text-white transition">Help Center</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Availability -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="text-sm font-semibold text-white">Available On</h4>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Web Platform">
+                            <i class="fas fa-desktop mr-2"></i>
+                            <span class="text-sm">Web</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Windows App">
+                            <i class="fab fa-windows mr-2"></i>
+                            <span class="text-sm">Windows</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Android App">
+                            <i class="fab fa-android mr-2"></i>
+                            <span class="text-sm">Android</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="iOS App">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-sm">iOS</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer & Legal -->
+        <div class="bg-dark-500 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="text-xs text-gray-400">
+                        <p class="mb-4 leading-relaxed">
+                            <span class="font-semibold text-gray-300">RISK WARNING:</span> The Financial Products offered by the company include Contracts for Difference ('CFDs') and other complex financial products. Trading CFDs carries a high level
+                            of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all investors because it is possible to lose all of your invested capital. You should never invest money that
+                            you cannot afford to lose. Before trading in the complex financial products offered, please ensure you understand the risks involved.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <a href="terms" class="text-blue-400 hover:text-blue-300 transition">Terms & Conditions</a>
+                            <a href="privacy" class="text-blue-400 hover:text-blue-300 transition">Privacy Policy</a>
+                            <a href="regulation" class="text-blue-400 hover:text-blue-300 transition">Legal Documents</a>
+                        </div>
+                        <p>©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> XYTRION MARKETS. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gtranslate_wrapper hidden lg:block"></div>
+
+        <script>
+            window.gtranslateSettings = {
+
+                default_language: "en",
+
+                alt_flags: {
+                    "en": "usa"
+                },
+
+                wrapper_selector: ".gtranslate_wrapper",
+
+                flag_style: "3d",
+
+            };
+        </script>
+
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+    </footer>
+
+    <!-- Sticky Market Ticker Widget -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Live Chat Button -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .last-widget {
+            position: sticky;
+            z-index: 10;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+
+
+    <div class="last-widget">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+
+
+        <!-- GetButton.io widget -->
+        <!--<script type="text/javascript">-->
+        <!--    (function () {-->
+        <!--        var options = {-->
+        <!--whatsapp: "1234567890", // WhatsApp number-->
+        <!--call_to_action: "Message us", // Call to action-->
+        <!--button_color: "#FF6550", // Color of button-->
+        <!--position: "right", // Position may be 'right' or 'left'-->
+        <!--        };-->
+        <!--        var proto = 'https:', host = "getbutton.io", url = proto + '//static.' + host;-->
+        <!--        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';-->
+        <!--        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };-->
+        <!--        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);-->
+        <!--    })();-->
+        <!--</script>-->
+        <!-- Additional Scripts -->
+        <script>
+            // Live Chat Function
+            function openLiveChat(e) {
+                e.preventDefault();
+                console.log('Opening live chat...');
+                // Implement your live chat functionality here
+            }
+
+            // Theme toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize any custom components
+                console.log('DOM loaded, initializing components...');
+            });
+
+            // Analytics (preserved from original)
+            function bindGAEvents(eventCategory, callback, iter) {
+                if (typeof iter === "undefined") {
+                    iter = 1;
+                }
+                if (window.dataLayer) {
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                } else if (iter > 2 && typeof callback === "function") {
+                    callback();
+                } else {
+                    setTimeout(function() {
+                        bindGAEvents(eventCategory, callback, iter + 1);
+                    }, 500);
+                }
+            }
+
+            $(document).ready(function() {
+                if ('' == '1') {
+                    bindGAEvents('ex_new_user');
+                }
+
+                $(document).on('click', '.start-trading, .open-live-account, .open-demo-account', function(event) {
+                    var redirectLink = $(this).attr('href');
+                    bindGAEvents('ex_button', function() {
+                        window.location.href = redirectLink;
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+
+<script src="/assets/js/app.js"></script>
+        <!-- Shared Live Chat Widget -->
+    <script src="/dashboard/chat-widget.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#6366F1',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: {
+                            100: '#374151',
+                            200: '#1F2937',
+                            300: '#111827',
+                            400: '#0F172A',
+                            500: '#0B1120',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Alpine.js x-cloak directive */
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Custom scrollbar for dark mode */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        /* Form elements styling */
+
+        .form-input {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .form-select {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .btn-primary {
+            @apply bg-primary hover: bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        .btn-secondary {
+            @apply bg-dark-100 hover: bg-dark-200 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        /* Navbar and mobile menu animations */
+
+        .navbar-dropdown {
+            @apply transition-all duration-300 ease-in-out transform origin-top;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Light mode overrides */
+
+        html:not(.dark) {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) body {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) .bg-dark-400 {
+            @apply bg-white;
+        }
+
+        html:not(.dark) .bg-dark-300 {
+            @apply bg-gray-50;
+        }
+
+        html:not(.dark) .border-gray-800 {
+            @apply border-gray-200;
+        }
+
+        html:not(.dark) .text-gray-200,
+        html:not(.dark) .text-gray-300,
+        html:not(.dark) .text-gray-400 {
+            @apply text-gray-700;
+        }
+
+        html:not(.dark) .hover\:bg-dark-200:hover,
+        html:not(.dark) .hover\:bg-gray-700:hover {
+            @apply hover: bg-gray-200;
+        }
+
+        html:not(.dark) .bg-dark-500 {
+            @apply bg-gray-100;
+        }
+    </style>
+
+    <title>XYTRION MARKETS | CFD Trading — Trading on Stocks, Gold, Oil, Indices</title>
+    <link rel="manifest" href="./">
+    <meta name="theme-color" content="#111827">
+    <meta property="x-session-id" content="ghJjEOrjZ3KUPun1UQksVUbvK88y21dgIhKtb8GT">
+    <meta property="og:site_name" content="XYTRION MARKETS">
+    <meta property="og:description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="keywords" content="forex, CFDs, CFD, Bitcoin trading, crypto trading, online trading, Forex trading, Oil trading, Gold trading, trading indexes, shares trading, commodities trading, trading platform, Cryptocurrencies day trading">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CFD Trading — Trading on Stocks, Gold, Oil, Indices | XYTRION MARKETS">
+    <meta property="og:image" content="img/share.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/storage/app/public/photos/LwmPzjLpWvqARLQerBqGjF6TGPAaVzudiJtGU1Is.png" type="image/x-icon">
+
+    <!-- Preload key assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- jQuery (required for some components) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript utilities -->
+    <script>
+        // Utility function for mobile menu
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('navigation', {
+                open: false,
+                toggle() {
+                    this.open = !this.open;
+                },
+                close() {
+                    this.open = false;
+                }
+            });
+
+            // Theme toggler
+            Alpine.store('darkMode', {
+                on: true,
+                toggle() {
+                    this.on = !this.on;
+                    if (this.on) {
+                        document.documentElement.classList.add('dark');
+                        document.body.classList.add('bg-gray-900');
+                        document.body.classList.remove('bg-gray-100');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.body.classList.remove('bg-gray-900');
+                        document.body.classList.add('bg-gray-100');
+                    }
+                    localStorage.setItem('darkMode', this.on ? 'dark' : 'light');
+                }
+            });
+        });
+
+        // Initialize theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const theme = localStorage.getItem('darkMode');
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('bg-gray-900');
+                document.body.classList.add('bg-gray-100');
+                if (window.Alpine) {
+                    Alpine.store('darkMode').on = false;
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/dashboard/chat-widget.css">
+</head>
+
+<body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:bg-blue-700 focus:text-white focus:fixed focus:px-4 focus:py-2 focus:top-2 focus:left-2 focus:z-50">
+        Skip to main content
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Header -->
+    <header class="bg-gray-900 border-b border-gray-800 relative z-50">
+        <!-- Top Navigation Bar -->
+        <div x-data="{ mobileMenuOpen: false }" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center justify-start leading-none">
+                        <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                    </a>
+                    </div>
+
+                    <!-- Main Navigation - Desktop -->
+                    <nav class="hidden md:flex space-x-8">
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Trading</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Cryptocurrencies</a>
+                                <a href="forex" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Forex</a>
+                                <a href="shares" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Shares</a>
+                                <a href="indices" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Indices</a>
+                                <a href="etfs" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">ETFs</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>System</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="trade" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Trade</a>
+                                <a href="copy" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Copy Trading</a>
+                                <a href="automate" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Automated Trading</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Company</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="about" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">About Us</a>
+                                <a href="why-us" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Why Us</a>
+                                <a href="faq" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">FAQ</a>
+                                <a href="regulation" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Legal & Regulation</a>
+                            </div>
+                        </div>
+
+                        <a href="for-traders" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Education</a>
+                        <a href="contacts" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Contact</a>
+                    </nav>
+
+                    <!-- Right Navigation -->
+                    <div class="hidden md:flex items-center">
+                        <div class="flex space-x-1 mr-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Desktop Version">
+                            <i class="fas fa-desktop"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Windows App">
+                            <i class="fab fa-windows"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Android App">
+                            <i class="fab fa-android"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="iOS App">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                        </div>
+
+                        <!-- Language Selector (Desktop) -->
+
+
+                        <!-- Dark/Light Mode Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-gray-200 mr-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon"></i>-->
+                        <!--</button>-->
+
+                        <div class="flex items-center space-x-4">
+                            <a href="login" class="text-gray-200 hover:text-white flex items-center">
+                            <i class="fas fa-lock mr-1"></i>
+                            <span>Log in</span>
+                        </a>
+                            <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            Sign up
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button and theme toggle -->
+                    <div class="flex md:hidden items-center space-x-2">
+                        <!-- Mobile Theme Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun text-lg"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon text-lg"></i>-->
+                        <!--</button>-->
+
+                        <!-- Mobile Menu Toggle -->
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu"
+                            aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenuOpen" class="md:hidden" id="mobile-menu" style="display: none;">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <!-- Mobile Navigation -->
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Trading</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Cryptocurrencies</a>
+                            <a href="forex" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Forex</a>
+                            <a href="shares" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Shares</a>
+                            <a href="indices" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Indices</a>
+                            <a href="etfs" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">ETFs</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>System</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="trade" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Trade</a>
+                            <a href="copy" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Copy Trading</a>
+                            <a href="automate" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Automated Trading</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Company</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">About Us</a>
+                            <a href="why-us" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Why Us</a>
+                            <a href="faq" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">FAQ</a>
+                            <a href="regulation" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Legal & Regulation</a>
+                        </div>
+                    </div>
+
+                    <a href="for-traders" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Education</a>
+                    <a href="contacts" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Contact</a>
+
+                    <!-- Language Selector (Mobile) -->
+
+                    <div class="pt-4 pb-3 border-t border-gray-700">
+                        <div class="flex items-center justify-between px-4">
+                            <div class="flex items-center space-x-3">
+                                <a href="login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-lock mr-1"></i> Log in
+                            </a>
+                                <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Sign up
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--  sub menu -->
+
+    <!-- Market Ticker Widget -->
+    <div class="bg-dark-300 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+            <div class="py-0">
+                <div class="crypto-ticker-wrapper-">
+                    <!-- <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no"
+                        width="100%"
+                        height="36px"
+                        scrolling="auto"
+                        marginwidth="0"
+                        marginheight="0"
+                        frameborder="0"
+                        border="0"
+                        class="w-full">
+                </iframe>-->
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                            {
+                                "symbols": [{
+                                        "proName": "FOREXCOM:SPXUSD",
+                                        "title": "S&P 500"
+                                    },
+                                    {
+                                        "proName": "FOREXCOM:NSXUSD",
+                                        "title": "Nasdaq 100"
+                                    },
+                                    {
+                                        "proName": "FX_IDC:EURUSD",
+                                        "title": "EUR/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:BTCUSD",
+                                        "title": "BTC/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:ETHUSD",
+                                        "title": "ETH/USD"
+                                    }
+                                ],
+                                "showSymbolLogo": true,
+                                "colorTheme": "dark",
+                                "isTransparent": true,
+                                "displayMode": "adaptive",
+                                "locale": "en"
+                            }
+                        </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative bg-gray-900 overflow-hidden">
+            <!-- Background with overlay -->
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+                <div class="absolute inset-0 bg-gray-900 opacity-70"></div>
+                <!-- Abstract data pattern background -->
+                <div class="absolute inset-0 opacity-10">
+                    <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="url(#grid-pattern)"></path>
+                <defs>
+                    <pattern id="grid-pattern" width="4" height="4" patternUnits="userSpaceOnUse">
+                        <path d="M0 0h4v4H0V0zm2 2h2v2H2V2z" fill="currentColor"></path>
+                    </pattern>
+                </defs>
+            </svg>
+                </div>
+                <!-- Glowing accent elements -->
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-400 rounded-full filter blur-3xl opacity-10"></div>
+            </div>
+
+            <div class="container mx-auto px-4 py-24 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-900 bg-opacity-30 rounded-full mb-6">
+                        Knowledge is Power
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Education Center</h1>
+                    <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                        Master the financial markets with our comprehensive educational resources designed for traders of all levels.
+                    </p>
+
+                    <script type="application/ld+json">
+                        {
+                            "@context": "http://schema.org",
+                            "@type": "BreadcrumbList",
+                            "itemListElement": [{
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "item": {
+                                        "@id": "https://xytrionmarkets.com",
+                                        "name": ""
+                                    }
+                                },
+                                {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "item": {
+                                        "@id": "https://xytrionmarkets.comfor-traders",
+                                        "name": "For Traders"
+                                    }
+                                }
+                            ]
+                        }
+                    </script>
+
+                    <div class="flex justify-center mt-8">
+                        <a href="#markets" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg flex items-center transition duration-300">
+                    <span>Explore Markets</span>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Markets Education Section -->
+        <section id="markets" class="py-16 bg-gray-900">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full mb-4">
+                        Trading Education
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-4">Build Your Trading Skills</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Educate yourself and strengthen your trading strategies with our comprehensive resources and robust trading tools.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Forex Card -->
+                    <div class="relative group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 group-hover:border-blue-500 transition duration-300 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-blue-900 bg-opacity-50 flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Forex</h3>
+                            </div>
+
+                            <p class="text-gray-300 mb-4">
+                                Forex is short for foreign exchange. The forex market is a place where currencies are traded. It is the largest and most liquid financial market in the world with an average daily turnover of 6.6 trillion U.S. dollars as of 2019. The basis of the forex
+                                market is the fluctuations of exchange rates. Forex traders speculate on the price fluctuations of currency pairs, making money on the difference between buying and selling prices.
+                            </p>
+
+                            <div class="mt-4 flex justify-end">
+                                <span class="text-blue-400 group-hover:text-blue-300 transition duration-300 flex items-center">
+                            Learn more
+                            <svg class="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CFD Card -->
+                    <div class="relative group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 group-hover:border-emerald-500 transition duration-300 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-emerald-900 bg-opacity-50 flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">CFD</h3>
+                            </div>
+
+                            <p class="text-gray-300 mb-4">
+                                A CFD, or Contract for Difference, is a type of financial instrument that allows you to trade on the price movements of stocks, regardless of whether prices are rising or falling. The key advantage of a CFD is the opportunity to speculate on the price
+                                movements of an asset (upwards or downwards) without actually owning the underlying asset.
+                            </p>
+
+                            <div class="mt-4 flex justify-end">
+                                <span class="text-emerald-400 group-hover:text-emerald-300 transition duration-300 flex items-center">
+                            Learn more
+                            <svg class="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cryptocurrency Card -->
+                    <div class="relative group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 group-hover:border-purple-500 transition duration-300 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-900 bg-opacity-50 flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Cryptocurrency</h3>
+                            </div>
+
+                            <p class="text-gray-300 mb-4">
+                                A cryptocurrency, crypto currency or crypto is a digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a ledger existing in a form of computerized database using strong cryptography to secure transaction
+                                records, to control the creation of additional coins, and to verify the transfer of coin ownership.
+                            </p>
+
+                            <div class="mt-4 flex justify-end">
+                                <span class="text-purple-400 group-hover:text-purple-300 transition duration-300 flex items-center">
+                            Learn more
+                            <svg class="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Digital Options Card -->
+                    <div class="relative group" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-500 rounded-xl blur opacity-30 group-hover:opacity-70 transition duration-300"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 group-hover:border-indigo-500 transition duration-300 h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-indigo-900 bg-opacity-50 flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                            </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-white">Digital Options</h3>
+                            </div>
+
+                            <p class="text-gray-300 mb-4">
+                                Digital Options is a trading instrument that allows you to speculate on the extent of the price change, rather than just on the general price direction. If the price of the underlying asset is to reach the threshold selected by the trader (known as the
+                                'strike price'), the payout may get as high as 900%. However, an unsuccessful trade will result in loss of the investment.
+                            </p>
+
+                            <div class="mt-4 flex justify-end">
+                                <span class="text-indigo-400 group-hover:text-indigo-300 transition duration-300 flex items-center">
+                            Learn more
+                            <svg class="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- More to Explore Section -->
+        <section class="py-16 bg-gray-800 relative">
+            <!-- Background pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <pattern id="trading-grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M25,0 L25,50 M0,25 L50,25" stroke="currentColor" stroke-width="0.5"/>
+                <circle cx="25" cy="25" r="1" fill="currentColor"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#trading-grid)"/>
+        </svg>
+            </div>
+
+            <div class="container mx-auto px-4 relative">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-emerald-400 uppercase bg-emerald-900 bg-opacity-30 rounded-full mb-4">
+                        Trading Toolkit
+                    </div>
+                    <h2 class="text-3xl font-bold text-white mb-4">More to Explore</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Discover our advanced trading features designed to enhance your trading experience and improve your results.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" x-data="{ activeCard: null }">
+                    <!-- Ultimate Platform Card -->
+                    <div class="relative h-full group" x-on:mouseenter="activeCard = 1" x-on:mouseleave="activeCard = null">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-xl blur opacity-30" x-bind:class="{ 'opacity-70': activeCard === 1 }"></div>
+                        <div class="relative bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 h-full flex flex-col transition duration-300" x-bind:class="{ 'border-blue-500 transform scale-[1.02]': activeCard === 1 }">
+                            <div class="w-16 h-16 rounded-full bg-blue-900 bg-opacity-50 flex items-center justify-center mb-6 mx-auto">
+                                <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Ultimate Platform</h3>
+
+                            <p class="text-gray-300 flex-grow">
+                                A multichart layout, technical analysis, historical quotes and beyond. Everything you're looking for in a platform — on the device of your choice.
+                            </p>
+
+                            <div class="mt-6 pt-4 border-t border-gray-700" x-show="activeCard === 1" x-transition>
+                                <a href="#" class="flex items-center justify-center text-emerald-400 hover:text-emerald-300 transition">
+                            <span>Explore platform</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis & Alerts Card -->
+                    <div class="relative h-full group" x-on:mouseenter="activeCard = 2" x-on:mouseleave="activeCard = null">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-xl blur opacity-30" x-bind:class="{ 'opacity-70': activeCard === 2 }"></div>
+                        <div class="relative bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 h-full flex flex-col transition duration-300" x-bind:class="{ 'border-emerald-500 transform scale-[1.02]': activeCard === 2 }">
+                            <div class="w-16 h-16 rounded-full bg-emerald-900 bg-opacity-50 flex items-center justify-center mb-6 mx-auto">
+                                <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                        </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Analysis & Alerts</h3>
+
+                            <p class="text-gray-300 flex-grow">
+                                Get the most out of fundamental and technical analysis with our News Feed and Economic Calendars. More than 100 most widely-used technical indicators.
+                            </p>
+
+                            <div class="mt-6 pt-4 border-t border-gray-700" x-show="activeCard === 2" x-transition>
+                                <a href="#" class="flex items-center justify-center text-emerald-400 hover:text-emerald-300 transition">
+                            <span>View tools</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demo Account Card -->
+                    <div class="relative h-full group" x-on:mouseenter="activeCard = 3" x-on:mouseleave="activeCard = null">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-xl blur opacity-30" x-bind:class="{ 'opacity-70': activeCard === 3 }"></div>
+                        <div class="relative bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 h-full flex flex-col transition duration-300" x-bind:class="{ 'border-purple-500 transform scale-[1.02]': activeCard === 3 }">
+                            <div class="w-16 h-16 rounded-full bg-purple-900 bg-opacity-50 flex items-center justify-center mb-6 mx-auto">
+                                <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Demo Account</h3>
+
+                            <p class="text-gray-300 flex-grow">
+                                Master your skills with a demo/practice account and educational content. Practice with virtual funds in real market conditions without any risk.
+                            </p>
+
+                            <div class="mt-6 pt-4 border-t border-gray-700" x-show="activeCard === 3" x-transition>
+                                <a href="#" class="flex items-center justify-center text-emerald-400 hover:text-emerald-300 transition">
+                            <span>Start demo</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Management Card -->
+                    <div class="relative h-full group" x-on:mouseenter="activeCard = 4" x-on:mouseleave="activeCard = null">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-indigo-500 rounded-xl blur opacity-30" x-bind:class="{ 'opacity-70': activeCard === 4 }"></div>
+                        <div class="relative bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm p-6 rounded-xl border border-gray-700 h-full flex flex-col transition duration-300" x-bind:class="{ 'border-indigo-500 transform scale-[1.02]': activeCard === 4 }">
+                            <div class="w-16 h-16 rounded-full bg-indigo-900 bg-opacity-50 flex items-center justify-center mb-6 mx-auto">
+                                <svg class="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-white mb-4 text-center">Risk Management</h3>
+
+                            <p class="text-gray-300 flex-grow">
+                                With features like Stop Loss/Take Profit, Negative balance protection and Trailing Stop you can manage your losses and profits at the levels predetermined by you.
+                            </p>
+
+                            <div class="mt-6 pt-4 border-t border-gray-700" x-show="activeCard === 4" x-transition>
+                                <a href="#" class="flex items-center justify-center text-emerald-400 hover:text-emerald-300 transition">
+                            <span>Learn more</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="py-16 bg-gray-900 relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-gray-900 opacity-50"></div>
+            <div class="absolute bottom-0 left-0 right-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="rgba(17, 24, 39, 1)" fill-opacity="1" d="M0,224L40,213.3C80,203,160,181,240,181.3C320,181,400,203,480,218.7C560,235,640,245,720,229.3C800,213,880,171,960,165.3C1040,160,1120,192,1200,192C1280,192,1360,160,1400,144L1440,128L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+        </svg>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl mx-auto bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Trading?</h2>
+                        <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                            Apply your knowledge and begin your trading journey with our advanced platform. Create an account today and access all our educational resources.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="register" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 text-white font-medium rounded-lg transition duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <span>Create Account</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                            <a href="login" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition duration-300 flex items-center justify-center">
+                        <span>Login</span>
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                        </svg>
+                    </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-400 text-gray-300">
+        <!-- Upper Footer -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Company Info -->
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <a href="/" class="flex items-center justify-start leading-none">
+                                <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                            </a>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-6">
+                                XYTRION MARKETS offers CFD trading on stocks, forex, indices, commodities, and cryptocurrencies with competitive spreads and advanced trading tools.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Twitter</span>
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">LinkedIn</span>
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                                <a href="mailto:support@xytrionmarkets.com" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Email</span>
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="about" class="text-sm text-gray-400 hover:text-white transition">About Us</a></li>
+                                <li><a href="why-us" class="text-sm text-gray-400 hover:text-white transition">Why Choose Us</a></li>
+                                <li><a href="for-traders" class="text-sm text-gray-400 hover:text-white transition">Education</a></li>
+                                <li><a href="contacts" class="text-sm text-gray-400 hover:text-white transition">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Trading -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Trading</h3>
+                            <ul class="space-y-3">
+                                <li><a href="cryptocurrencies" class="text-sm text-gray-400 hover:text-white transition">Cryptocurrencies</a></li>
+                                <li><a href="forex" class="text-sm text-gray-400 hover:text-white transition">Forex</a></li>
+                                <li><a href="shares" class="text-sm text-gray-400 hover:text-white transition">Shares</a></li>
+                                <li><a href="indices" class="text-sm text-gray-400 hover:text-white transition">Indices</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Account -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Your Account</h3>
+                            <ul class="space-y-3">
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Log In</a></li>
+                                <li><a href="register" class="text-sm text-gray-400 hover:text-white transition">Create Account</a></li>
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Demo Account</a></li>
+                                <li><a href="contact" class="text-sm text-gray-400 hover:text-white transition">Help Center</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Availability -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="text-sm font-semibold text-white">Available On</h4>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Web Platform">
+                            <i class="fas fa-desktop mr-2"></i>
+                            <span class="text-sm">Web</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Windows App">
+                            <i class="fab fa-windows mr-2"></i>
+                            <span class="text-sm">Windows</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Android App">
+                            <i class="fab fa-android mr-2"></i>
+                            <span class="text-sm">Android</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="iOS App">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-sm">iOS</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer & Legal -->
+        <div class="bg-dark-500 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="text-xs text-gray-400">
+                        <p class="mb-4 leading-relaxed">
+                            <span class="font-semibold text-gray-300">RISK WARNING:</span> The Financial Products offered by the company include Contracts for Difference ('CFDs') and other complex financial products. Trading CFDs carries a high level
+                            of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all investors because it is possible to lose all of your invested capital. You should never invest money that
+                            you cannot afford to lose. Before trading in the complex financial products offered, please ensure you understand the risks involved.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <a href="terms" class="text-blue-400 hover:text-blue-300 transition">Terms & Conditions</a>
+                            <a href="privacy" class="text-blue-400 hover:text-blue-300 transition">Privacy Policy</a>
+                            <a href="regulation" class="text-blue-400 hover:text-blue-300 transition">Legal Documents</a>
+                        </div>
+                        <p>©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> XYTRION MARKETS. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gtranslate_wrapper hidden lg:block"></div>
+
+        <script>
+            window.gtranslateSettings = {
+
+                default_language: "en",
+
+                alt_flags: {
+                    "en": "usa"
+                },
+
+                wrapper_selector: ".gtranslate_wrapper",
+
+                flag_style: "3d",
+
+            };
+        </script>
+
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+    </footer>
+
+    <!-- Sticky Market Ticker Widget -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Live Chat Button -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .last-widget {
+            position: sticky;
+            z-index: 10;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+
+
+    <div class="last-widget">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+
+
+        <!-- GetButton.io widget -->
+        <!--<script type="text/javascript">-->
+        <!--    (function () {-->
+        <!--        var options = {-->
+        <!--whatsapp: "1234567890", // WhatsApp number-->
+        <!--call_to_action: "Message us", // Call to action-->
+        <!--button_color: "#FF6550", // Color of button-->
+        <!--position: "right", // Position may be 'right' or 'left'-->
+        <!--        };-->
+        <!--        var proto = 'https:', host = "getbutton.io", url = proto + '//static.' + host;-->
+        <!--        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';-->
+        <!--        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };-->
+        <!--        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);-->
+        <!--    })();-->
+        <!--</script>-->
+        <!-- Additional Scripts -->
+        <script>
+            // Live Chat Function
+            function openLiveChat(e) {
+                e.preventDefault();
+                console.log('Opening live chat...');
+                // Implement your live chat functionality here
+            }
+
+            // Theme toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize any custom components
+                console.log('DOM loaded, initializing components...');
+            });
+
+            // Analytics (preserved from original)
+            function bindGAEvents(eventCategory, callback, iter) {
+                if (typeof iter === "undefined") {
+                    iter = 1;
+                }
+                if (window.dataLayer) {
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                } else if (iter > 2 && typeof callback === "function") {
+                    callback();
+                } else {
+                    setTimeout(function() {
+                        bindGAEvents(eventCategory, callback, iter + 1);
+                    }, 500);
+                }
+            }
+
+            $(document).ready(function() {
+                if ('' == '1') {
+                    bindGAEvents('ex_new_user');
+                }
+
+                $(document).on('click', '.start-trading, .open-live-account, .open-demo-account', function(event) {
+                    var redirectLink = $(this).attr('href');
+                    bindGAEvents('ex_button', function() {
+                        window.location.href = redirectLink;
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+
+<script src="/assets/js/app.js"></script>
+        <!-- Shared Live Chat Widget -->
+    <script src="/dashboard/chat-widget.js" defer></script>
+</body>
+
+</html>

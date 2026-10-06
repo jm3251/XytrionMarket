@@ -1,0 +1,342 @@
+[
+  {
+    "symbol": "BTC",
+    "name": "BTC/USD",
+    "imageId": "1"
+  },
+  {
+    "symbol": "ETH",
+    "name": "Ethereum",
+    "imageId": "279"
+  },
+  {
+    "symbol": "SOL",
+    "name": "Solana",
+    "imageId": "4128"
+  },
+  {
+    "symbol": "XRP",
+    "name": "XRP",
+    "imageId": "44"
+  },
+  {
+    "symbol": "BSC-USD",
+    "name": "BSC-USD/USD",
+    "imageId": "35021",
+    "coinGeckoId": "binance-bridged-usdt-bnb-smart-chain"
+  },
+  {
+    "symbol": "ENA",
+    "name": "ENA/USD",
+    "imageId": "36530"
+  },
+  {
+    "symbol": "BNB",
+    "name": "BNB",
+    "imageId": "825"
+  },
+  {
+    "symbol": "DOGE",
+    "name": "Dogecoin",
+    "imageId": "5"
+  },
+  {
+    "symbol": "USD1",
+    "name": "USD1",
+    "imageId": "54977"
+  },
+  {
+    "symbol": "TRX",
+    "name": "TRX/USD",
+    "imageId": "1094"
+  },
+  {
+    "symbol": "APT",
+    "name": "APT/USD",
+    "imageId": "26455"
+  },
+  {
+    "symbol": "ADA",
+    "name": "ADA/USD",
+    "imageId": "975"
+  },
+  {
+    "symbol": "SUI",
+    "name": "Sui",
+    "imageId": "26375"
+  },
+  {
+    "symbol": "CBBTC",
+    "name": "CBBTC/USD",
+    "imageId": "40143",
+    "coinGeckoId": "coinbase-wrapped-btc"
+  },
+  {
+    "symbol": "PEPE",
+    "name": "PEPE/USD",
+    "imageId": "29850"
+  },
+  {
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "imageId": "877"
+  },
+  {
+    "symbol": "LTC",
+    "name": "Litecoin",
+    "imageId": "2"
+  },
+  {
+    "symbol": "FIGR_HELOC",
+    "name": "Figure Heloc",
+    "imageId": "68480"
+  },
+  {
+    "symbol": "TAO",
+    "name": "Bittensor",
+    "imageId": "28452"
+  },
+  {
+    "symbol": "ZEC",
+    "name": "Zcash",
+    "imageId": "486"
+  },
+  {
+    "symbol": "HYPE",
+    "name": "HYPE/USD",
+    "imageId": "50882"
+  },
+  {
+    "symbol": "WBTC",
+    "name": "WBTC/USD",
+    "imageId": "7598"
+  },
+  {
+    "symbol": "ONDO",
+    "name": "ONDO/USD",
+    "imageId": "26580"
+  },
+  {
+    "symbol": "AVAX",
+    "name": "AVAX/USD",
+    "imageId": "12559"
+  },
+  {
+    "symbol": "WETH",
+    "name": "WETH/USD",
+    "imageId": "2518",
+    "coinGeckoId": "weth"
+  },
+  {
+    "symbol": "AAVE",
+    "name": "AAVE/USD",
+    "imageId": "12645"
+  },
+  {
+    "symbol": "ASTER",
+    "name": "ASTER/USD",
+    "imageId": "69040"
+  },
+  {
+    "symbol": "BCH",
+    "name": "Bitcoin Cash",
+    "imageId": "780"
+  },
+  {
+    "symbol": "PAXG",
+    "name": "PAX Gold",
+    "imageId": "9519"
+  },
+  {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "imageId": "12504"
+  },
+  {
+    "symbol": "DOT",
+    "name": "DOT/USD",
+    "imageId": "12171"
+  },
+  {
+    "symbol": "NEAR",
+    "name": "NEAR/USD",
+    "imageId": "10365"
+  },
+  {
+    "symbol": "ETC",
+    "name": "ETC/USD",
+    "imageId": "453"
+  },
+  {
+    "symbol": "SIREN",
+    "name": "SIREN/USD",
+    "imageId": "54479",
+    "coinGeckoId": "siren-2"
+  },
+  {
+    "symbol": "SHIB",
+    "name": "SHIB/USD",
+    "imageId": "11939"
+  },
+  {
+    "symbol": "WLFI",
+    "name": "WLFI/USD",
+    "imageId": "50767"
+  },
+  {
+    "symbol": "TON",
+    "name": "Toncoin",
+    "imageId": "17980"
+  },
+  {
+    "symbol": "XLM",
+    "name": "Stellar",
+    "imageId": "100"
+  },
+  {
+    "symbol": "XMR",
+    "name": "Monero",
+    "imageId": "69"
+  },
+  {
+    "symbol": "HBAR",
+    "name": "Hedera",
+    "imageId": "3688"
+  },
+  {
+    "symbol": "ICP",
+    "name": "ICP/USD",
+    "imageId": "14495"
+  },
+  {
+    "symbol": "USDE",
+    "name": "Ethena USDe",
+    "imageId": "33613"
+  },
+  {
+    "symbol": "STETH",
+    "name": "STETH/USD",
+    "imageId": "13442",
+    "coinGeckoId": "staked-ether"
+  },
+  {
+    "symbol": "WSTETH",
+    "name": "WSTETH/USD",
+    "imageId": "18834",
+    "coinGeckoId": "wrapped-steth"
+  },
+  {
+    "symbol": "WBT",
+    "name": "WBT/USD",
+    "imageId": "27045"
+  },
+  {
+    "symbol": "PYUSD",
+    "name": "PayPal USD",
+    "imageId": "31212"
+  },
+  {
+    "symbol": "MNT",
+    "name": "MNT/USD",
+    "imageId": "30980"
+  },
+  {
+    "symbol": "TKX",
+    "name": "TKX/USD",
+    "imageId": "4984",
+    "coinGeckoId": "tokenize-xchange"
+  },
+  {
+    "symbol": "SKY",
+    "name": "Sky",
+    "imageId": "39925"
+  },
+  {
+    "symbol": "PI",
+    "name": "Pi Network",
+    "imageId": "54342"
+  },
+  {
+    "symbol": "JITOSOL",
+    "name": "JITOSOL/USD",
+    "imageId": "28046"
+  },
+  {
+    "symbol": "HTX",
+    "name": "HTX/USD",
+    "imageId": "35491"
+  },
+  {
+    "symbol": "OKB",
+    "name": "OKB",
+    "imageId": "4463"
+  },
+  {
+    "symbol": "RAIN",
+    "name": "RAIN/USD",
+    "imageId": "69134"
+  },
+  {
+    "symbol": "USDG",
+    "name": "Global Dollar",
+    "imageId": "51281"
+  },
+  {
+    "symbol": "BGB",
+    "name": "BGB/USD",
+    "imageId": "11610"
+  },
+  {
+    "symbol": "WBETH",
+    "name": "WBETH/USD",
+    "imageId": "30061",
+    "coinGeckoId": "wrapped-beacon-eth"
+  },
+  {
+    "symbol": "WEETH",
+    "name": "WEETH/USD",
+    "imageId": "33033",
+    "coinGeckoId": "wrapped-eeth"
+  },
+  {
+    "symbol": "CRO",
+    "name": "Cronos",
+    "imageId": "7310"
+  },
+  {
+    "symbol": "M",
+    "name": "MemeCore",
+    "imageId": "53247"
+  },
+  {
+    "symbol": "CC",
+    "name": "CC/USD",
+    "imageId": "70468"
+  },
+  {
+    "symbol": "USDF",
+    "name": "Falcon USD",
+    "imageId": "54558"
+  },
+  {
+    "symbol": "LEO",
+    "name": "LEO/USD",
+    "imageId": "8418"
+  },
+  {
+    "symbol": "USYC",
+    "name": "Circle USYC",
+    "imageId": "51054"
+  },
+  {
+    "symbol": "JSOL",
+    "name": "JSOL/USD",
+    "imageId": "20664",
+    "coinGeckoId": "jpool"
+  },
+  {
+    "symbol": "BUIDL",
+    "name": "BUIDL/USD",
+    "imageId": "36291"
+  }
+]

@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#6366F1',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: {
+                            100: '#374151',
+                            200: '#1F2937',
+                            300: '#111827',
+                            400: '#0F172A',
+                            500: '#0B1120',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Alpine.js x-cloak directive */
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Custom scrollbar for dark mode */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        /* Form elements styling */
+
+        .form-input {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .form-select {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .btn-primary {
+            @apply bg-primary hover: bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        .btn-secondary {
+            @apply bg-dark-100 hover: bg-dark-200 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        /* Navbar and mobile menu animations */
+
+        .navbar-dropdown {
+            @apply transition-all duration-300 ease-in-out transform origin-top;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Light mode overrides */
+
+        html:not(.dark) {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) body {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) .bg-dark-400 {
+            @apply bg-white;
+        }
+
+        html:not(.dark) .bg-dark-300 {
+            @apply bg-gray-50;
+        }
+
+        html:not(.dark) .border-gray-800 {
+            @apply border-gray-200;
+        }
+
+        html:not(.dark) .text-gray-200,
+        html:not(.dark) .text-gray-300,
+        html:not(.dark) .text-gray-400 {
+            @apply text-gray-700;
+        }
+
+        html:not(.dark) .hover\:bg-dark-200:hover,
+        html:not(.dark) .hover\:bg-gray-700:hover {
+            @apply hover: bg-gray-200;
+        }
+
+        html:not(.dark) .bg-dark-500 {
+            @apply bg-gray-100;
+        }
+    </style>
+
+    <title>XYTRION MARKETS | CFD Trading — Trading on Stocks, Gold, Oil, Indices</title>
+    <link rel="manifest" href="./">
+    <meta name="theme-color" content="#111827">
+    <meta property="x-session-id" content="ghJjEOrjZ3KUPun1UQksVUbvK88y21dgIhKtb8GT">
+    <meta property="og:site_name" content="XYTRION MARKETS">
+    <meta property="og:description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="keywords" content="forex, CFDs, CFD, Bitcoin trading, crypto trading, online trading, Forex trading, Oil trading, Gold trading, trading indexes, shares trading, commodities trading, trading platform, Cryptocurrencies day trading">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CFD Trading — Trading on Stocks, Gold, Oil, Indices | XYTRION MARKETS">
+    <meta property="og:image" content="img/share.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/storage/app/public/photos/LwmPzjLpWvqARLQerBqGjF6TGPAaVzudiJtGU1Is.png" type="image/x-icon">
+
+    <!-- Preload key assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- jQuery (required for some components) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript utilities -->
+    <script>
+        // Utility function for mobile menu
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('navigation', {
+                open: false,
+                toggle() {
+                    this.open = !this.open;
+                },
+                close() {
+                    this.open = false;
+                }
+            });
+
+            // Theme toggler
+            Alpine.store('darkMode', {
+                on: true,
+                toggle() {
+                    this.on = !this.on;
+                    if (this.on) {
+                        document.documentElement.classList.add('dark');
+                        document.body.classList.add('bg-gray-900');
+                        document.body.classList.remove('bg-gray-100');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.body.classList.remove('bg-gray-900');
+                        document.body.classList.add('bg-gray-100');
+                    }
+                    localStorage.setItem('darkMode', this.on ? 'dark' : 'light');
+                }
+            });
+        });
+
+        // Initialize theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const theme = localStorage.getItem('darkMode');
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('bg-gray-900');
+                document.body.classList.add('bg-gray-100');
+                if (window.Alpine) {
+                    Alpine.store('darkMode').on = false;
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/dashboard/chat-widget.css">
+</head>
+
+<body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:bg-blue-700 focus:text-white focus:fixed focus:px-4 focus:py-2 focus:top-2 focus:left-2 focus:z-50">
+        Skip to main content
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Header -->
+    <header class="bg-gray-900 border-b border-gray-800 relative z-50">
+        <!-- Top Navigation Bar -->
+        <div x-data="{ mobileMenuOpen: false }" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center justify-start leading-none">
+                        <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                    </a>
+                    </div>
+
+                    <!-- Main Navigation - Desktop -->
+                    <nav class="hidden md:flex space-x-8">
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Trading</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Cryptocurrencies</a>
+                                <a href="forex" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Forex</a>
+                                <a href="shares" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Shares</a>
+                                <a href="indices" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Indices</a>
+                                <a href="etfs" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">ETFs</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>System</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="trade" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Trade</a>
+                                <a href="copy" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Copy Trading</a>
+                                <a href="automate" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Automated Trading</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Company</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="about" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">About Us</a>
+                                <a href="why-us" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Why Us</a>
+                                <a href="faq" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">FAQ</a>
+                                <a href="regulation" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Legal & Regulation</a>
+                            </div>
+                        </div>
+
+                        <a href="for-traders" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Education</a>
+                        <a href="contacts" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Contact</a>
+                    </nav>
+
+                    <!-- Right Navigation -->
+                    <div class="hidden md:flex items-center">
+                        <div class="flex space-x-1 mr-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Desktop Version">
+                            <i class="fas fa-desktop"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Windows App">
+                            <i class="fab fa-windows"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Android App">
+                            <i class="fab fa-android"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="iOS App">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                        </div>
+
+                        <!-- Language Selector (Desktop) -->
+
+
+                        <!-- Dark/Light Mode Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-gray-200 mr-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon"></i>-->
+                        <!--</button>-->
+
+                        <div class="flex items-center space-x-4">
+                            <a href="login" class="text-gray-200 hover:text-white flex items-center">
+                            <i class="fas fa-lock mr-1"></i>
+                            <span>Log in</span>
+                        </a>
+                            <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            Sign up
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button and theme toggle -->
+                    <div class="flex md:hidden items-center space-x-2">
+                        <!-- Mobile Theme Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun text-lg"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon text-lg"></i>-->
+                        <!--</button>-->
+
+                        <!-- Mobile Menu Toggle -->
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu"
+                            aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenuOpen" class="md:hidden" id="mobile-menu" style="display: none;">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <!-- Mobile Navigation -->
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Trading</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Cryptocurrencies</a>
+                            <a href="forex" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Forex</a>
+                            <a href="shares" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Shares</a>
+                            <a href="indices" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Indices</a>
+                            <a href="etfs" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">ETFs</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>System</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="trade" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Trade</a>
+                            <a href="copy" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Copy Trading</a>
+                            <a href="automate" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Automated Trading</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Company</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">About Us</a>
+                            <a href="why-us" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Why Us</a>
+                            <a href="faq" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">FAQ</a>
+                            <a href="regulation" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Legal & Regulation</a>
+                        </div>
+                    </div>
+
+                    <a href="for-traders" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Education</a>
+                    <a href="contacts" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Contact</a>
+
+                    <!-- Language Selector (Mobile) -->
+
+                    <div class="pt-4 pb-3 border-t border-gray-700">
+                        <div class="flex items-center justify-between px-4">
+                            <div class="flex items-center space-x-3">
+                                <a href="login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-lock mr-1"></i> Log in
+                            </a>
+                                <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Sign up
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--  sub menu -->
+
+    <!-- Market Ticker Widget -->
+    <div class="bg-dark-300 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+            <div class="py-0">
+                <div class="crypto-ticker-wrapper-">
+                    <!-- <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no"
+                        width="100%"
+                        height="36px"
+                        scrolling="auto"
+                        marginwidth="0"
+                        marginheight="0"
+                        frameborder="0"
+                        border="0"
+                        class="w-full">
+                </iframe>-->
+                    <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                            {
+                                "symbols": [{
+                                        "proName": "FOREXCOM:SPXUSD",
+                                        "title": "S&P 500"
+                                    },
+                                    {
+                                        "proName": "FOREXCOM:NSXUSD",
+                                        "title": "Nasdaq 100"
+                                    },
+                                    {
+                                        "proName": "FX_IDC:EURUSD",
+                                        "title": "EUR/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:BTCUSD",
+                                        "title": "BTC/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:ETHUSD",
+                                        "title": "ETH/USD"
+                                    }
+                                ],
+                                "showSymbolLogo": true,
+                                "colorTheme": "dark",
+                                "isTransparent": true,
+                                "displayMode": "adaptive",
+                                "locale": "en"
+                            }
+                        </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow">
+
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+            <!-- Abstract Background Elements -->
+            <div class="absolute inset-0 z-20 md:z-0 pointer-events-none">
+                <div class="absolute top-0 left-0 w-full h-full opacity-60 md:opacity-20">
+                    <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%">
+                        <stop stop-color="#3B82F6" stop-opacity=".25" offset="0%"/>
+                        <stop stop-color="#10B981" stop-opacity=".2" offset="100%"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#a)" d="M400,115 C515.46,115 615,214.54 615,330 C615,445.46 515.46,545 400,545 C284.54,545 185,445.46 185,330 C185,214.54 284.54,115 400,115 Z" transform="translate(0 -50)" />
+                <path fill="url(#a)" d="M400,115 C515.46,115 615,214.54 615,330 C615,445.46 515.46,545 400,545 C284.54,545 185,445.46 185,330 C185,214.54 284.54,115 400,115 Z" transform="translate(350 150)" />
+            </svg>
+                </div>
+                <div class="absolute bottom-0 right-0 w-full h-full opacity-50 md:opacity-10">
+                    <svg width="100%" height="100%" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#6366F1" stroke-width="2">
+                    <path d="M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737M490 85L309 538 40 599 295 764"/>
+                    <path d="M733 738L520 660M603 493L731 737M520 660L309 538"/>
+                </g>
+            </svg>
+                </div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 px-4 py-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Legal Documentation
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                        <span class="block">Privacy Policy</span>
+                        <span class="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">Your Data Protection</span>
+                    </h1>
+                    <p class="max-w-2xl mt-5 mx-auto text-xl text-gray-300">
+                        Understanding how we protect your information and respect your privacy
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Content -->
+        <section class="py-12 bg-gray-900">
+            <div class="container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-700 shadow-xl overflow-hidden">
+                    <div class="p-6 md:p-10">
+                        <!-- Policy Content -->
+                        <div class="prose prose-lg prose-invert max-w-none">
+                            <div class="space-y-8">
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Our Commitment</h2>
+                                    <p class="text-gray-300 mb-4">
+                                        Privacy is of utmost importance at XYTRION MARKETS. We recognize the significance of protecting information which is stored on our servers or network or is intended to be stored on our servers or network and which relates to an individual. The data we protect
+                                        are the "Personal Data" which is any information relating to an identified or identifiable natural person, sometimes called a data subject, and have made protecting the privacy and the confidentiality of Personal
+                                        Data a fundamental component of the way we do business.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        This Privacy Policy informs you of the ways we work to ensure privacy and the confidentiality of Personal Data and describes the information we gather, how we use those Personal Data and the circumstances under which we disclose such information to third-parties.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Regulatory Compliance</h2>
+                                    <p class="text-gray-300 mb-4">
+                                        This Privacy Policy is designed to address regulatory requirements of the jurisdictions in which XYTRION MARKETS offers its Services, including the General Data Protection Regulation ("GDPR"), as enacted by the European Commission. In this Privacy Policy,
+                                        the term "Service" and "Services" has the same meaning as described in the User Agreement.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        If you do not agree with this Privacy Policy, in general, or any part of it, you should not use the Services. This Privacy Policy is periodically reviewed to ensure that any new obligations and changes to our business model are taken into consideration.
+                                        We may amend this Privacy Policy at any time by posting an amended version on our website.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        Our Services are offered through one or more subsidiaries of XYTRION MARKETS. By using the Services, you understand that your Personal Data may be used by XYTRION MARKETS.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Collection of Personal Data</h2>
+                                    <p class="text-gray-300 mb-4">When you access or use the Services, we collect the following information:</p>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Information You May Provide to Us</h3>
+                                    <p class="text-gray-300 mb-4">
+                                        You may give us information about you by filling in forms on our website or through our app or by corresponding with us by phone, email or otherwise. This includes information you provide when you register to use the Services and when you report a problem
+                                        with the website.
+                                    </p>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Information We Collect About You</h3>
+                                    <p class="text-gray-300 mb-4">With regard to each of your visits to our website, we automatically collect the following information:</p>
+
+                                    <ul class="list-disc pl-6 text-gray-300 space-y-2 mb-6">
+                                        <li>
+                                            <span class="text-white font-medium">Login Information:</span> We log technical information about your use of the Services, including the type of browser and version you use, the last access time of your account,
+                                            the Internet Protocol (IP) address used to create the account and the most recent IP address used to access the account.
+                                        </li>
+                                        <li>
+                                            <span class="text-white font-medium">Device Information:</span> We collect information about the device you use to access your account, including the hardware model, operating system and version, and unique
+                                            device identifiers, but this information is anonymous and not tied to any particular person.
+                                        </li>
+                                        <li>
+                                            <span class="text-white font-medium">Transaction Information:</span> In connection with our Conversion Service, as such term is defined in our User Agreement, we may collect and maintain information relating
+                                            to transactions you effect in your account.
+                                        </li>
+                                    </ul>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Information We Collect Required By Law, Rule, or Regulation</h3>
+                                    <p class="text-gray-300 mb-4">Depending on the Service, we may collect information from you in order to meet regulatory obligations around know-your-customer ("KYC") and anti-money laundering ("AML") requirements. Information that we collect from
+                                        you includes the following:</p>
+
+                                    <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                                        <li>Full name</li>
+                                        <li>Residential address</li>
+                                        <li>Contact details (telephone number, email address)</li>
+                                        <li>Date and place of birth, gender, place of citizenship</li>
+                                        <li>Your status as a politically exposed person</li>
+                                        <li>Source of funds & proof of address</li>
+                                        <li>Passport and/or national driver's license or government-issued identification card to verify your identity</li>
+                                        <li>Transaction history and account balances in connection with your use of certain Services</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Disclosure of Personal Data</h2>
+                                    <p class="text-gray-300 mb-4">
+                                        We may share your information with selected recipients to perform functions required to provide certain Services to you.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        We also may share Personal Data with a buyer or other successor in the event of a merger, divestiture, restructuring, reorganization, dissolution or other sale or transfer of some or all of XYTRION MARKETS' assets, whether as a going concern or as part
+                                        of bankruptcy, liquidation or similar proceeding, in which Personal Data held by XYTRION MARKETS is among the assets transferred.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        Except where we are required by law to disclose Personal Data, or are exempted from, released from or not subject to any legal requirement concerning the disclosure of Personal Data, we will require any person to whom we provide your Personal Data to
+                                        agree to comply with our Privacy Policy in force at that time or requirements substantially similar to such policy. We will make reasonable commercial efforts to ensure that they comply with such policy or requirements,
+                                        however, where not expressly prohibited by law, we will have no liability to you, if any person fails to do so.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        We shall require any third-party, including without limitation, any government or enforcement entity, seeking access to the data we hold to a court order, or equivalent proof that they are statutorily authorized to access your data and that their request
+                                        is valid and within their statutory or regulatory power.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Security of Your Personal Data</h2>
+                                    <p class="text-gray-300 mb-4">
+                                        We protect Personal Data with appropriate physical, technological and organizational safeguards and security measures. Your Personal Data comes to us via the internet which chooses its own routes and means, whereby information is conveyed from location
+                                        to location. We audit our procedures and security measures regularly to ensure they are being properly administered and remain effective and appropriate.
+                                    </p>
+                                    <p class="text-gray-300 mb-4">
+                                        Every member of XYTRION MARKETS is committed to our privacy policies and procedures to safeguard Personal Data. Our site has security measures in place to protect against the loss, misuse and unauthorized alteration of the information under our control.
+                                        More specifically, our server uses TLS (Transport Layer Security) security protection by encrypting your Personal Data to prevent individuals from accessing such Personal Data as it travels over the internet.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-bold text-blue-400 mb-4">Your Rights</h2>
+                                    <p class="text-gray-300 mb-4">The rights that are available to you in relation to the Personal Data we hold about you are outlined below:</p>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Information Access</h3>
+                                    <p class="text-gray-300 mb-4">
+                                        If you ask us, we will confirm whether we are processing your Personal Data and, if so, what information we process and, if requested, provide you with a copy of that information within 30 days from the date of your request.
+                                    </p>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Erasure</h3>
+                                    <p class="text-gray-300 mb-4">
+                                        You can ask us to delete or remove your Personal Data in certain circumstances such as if we no longer need it, provided that we have no legal or regulatory obligation to retain that data. Such requests will be subject to any agreements that you have
+                                        entered into with us, and to any retention limits, we are required to comply with in accordance with applicable laws and regulations. If we have disclosed your Personal Data to others, we will let them know about
+                                        the erasure request where possible. If you ask us, if possible and lawful to do so, we will also inform you with whom we have shared your Personal Data so that you can contact them directly.
+                                    </p>
+
+                                    <h3 class="text-xl font-semibold text-white mt-6 mb-3">Processing Restrictions</h3>
+                                    <p class="text-gray-300 mb-4">
+                                        You can ask us to block or suppress the processing of your Personal Data in certain circumstances, such as, if you contest the accuracy of that Personal Data or object to us processing it. It will not stop us from storing your Personal Data. We will inform
+                                        you before we decide not to agree with any requested restriction. If we have disclosed your Personal Data to others, we will let them know about the restriction of processing where possible. If you ask us, if possible
+                                        and lawful to do so, we will also inform you with whom we have shared your Personal Data so that you can contact them directly.
+                                    </p>
+
+                                    <p class="text-gray-300 mt-8 mb-4">
+                                        By using the Services, you signify your agreement to this Privacy Policy. XYTRION MARKETS reserves the right to change or amend this Privacy Policy at any time. If we make any material changes to this Privacy Policy, the revised Policy will be posted here
+                                        and we will notify our users at least 30 days prior to the changes taking effect so that you are always aware of what information we collect, how we use it and under what circumstances we disclose it. Please check
+                                        this page frequently to see any updates or changes to this Privacy Policy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action -->
+                        <div class="mt-12 text-center" x-data="{ open: false }">
+                            <button @click="open = !open" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150">
+                        <span x-text="open ? 'Hide Data Protection Details' : 'Learn More About Data Protection'">Learn More About Data Protection</span>
+                        <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                             :class="{'transform rotate-180': open}">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                            <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-95" class="mt-8 bg-gray-900 bg-opacity-50 p-6 rounded-xl backdrop-blur-sm border border-gray-700">
+                                <p class="text-gray-300">
+                                    At XYTRION MARKETS, we are committed to protecting your personal data and privacy rights. For any questions about our privacy practices or to exercise your data protection rights, please contact our Data Protection Officer at privacy{{$settings->site_name}}.com.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="/about" class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors duration-300 group">
+                        <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400">About Us</h3>
+                        <p class="text-gray-400">Learn more about our company and mission</p>
+                    </a>
+                    <a href="/contact" class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors duration-300 group">
+                        <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400">Contact Us</h3>
+                        <p class="text-gray-400">Questions about privacy? Get in touch</p>
+                    </a>
+                    <a href="/register" class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors duration-300 group">
+                        <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400">Start Trading</h3>
+                        <p class="text-gray-400">Create an account to begin trading</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-400 text-gray-300">
+        <!-- Upper Footer -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Company Info -->
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <a href="/" class="flex items-center justify-start leading-none">
+                                <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                            </a>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-6">
+                                XYTRION MARKETS offers CFD trading on stocks, forex, indices, commodities, and cryptocurrencies with competitive spreads and advanced trading tools.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Twitter</span>
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">LinkedIn</span>
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                                <a href="mailto:support@xytrionmarkets.com" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Email</span>
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="about" class="text-sm text-gray-400 hover:text-white transition">About Us</a></li>
+                                <li><a href="why-us" class="text-sm text-gray-400 hover:text-white transition">Why Choose Us</a></li>
+                                <li><a href="for-traders" class="text-sm text-gray-400 hover:text-white transition">Education</a></li>
+                                <li><a href="contacts" class="text-sm text-gray-400 hover:text-white transition">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Trading -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Trading</h3>
+                            <ul class="space-y-3">
+                                <li><a href="cryptocurrencies" class="text-sm text-gray-400 hover:text-white transition">Cryptocurrencies</a></li>
+                                <li><a href="forex" class="text-sm text-gray-400 hover:text-white transition">Forex</a></li>
+                                <li><a href="shares" class="text-sm text-gray-400 hover:text-white transition">Shares</a></li>
+                                <li><a href="indices" class="text-sm text-gray-400 hover:text-white transition">Indices</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Account -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Your Account</h3>
+                            <ul class="space-y-3">
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Log In</a></li>
+                                <li><a href="register" class="text-sm text-gray-400 hover:text-white transition">Create Account</a></li>
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Demo Account</a></li>
+                                <li><a href="contact" class="text-sm text-gray-400 hover:text-white transition">Help Center</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Availability -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="text-sm font-semibold text-white">Available On</h4>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Web Platform">
+                            <i class="fas fa-desktop mr-2"></i>
+                            <span class="text-sm">Web</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Windows App">
+                            <i class="fab fa-windows mr-2"></i>
+                            <span class="text-sm">Windows</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Android App">
+                            <i class="fab fa-android mr-2"></i>
+                            <span class="text-sm">Android</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="iOS App">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-sm">iOS</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer & Legal -->
+        <div class="bg-dark-500 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="text-xs text-gray-400">
+                        <p class="mb-4 leading-relaxed">
+                            <span class="font-semibold text-gray-300">RISK WARNING:</span> The Financial Products offered by the company include Contracts for Difference ('CFDs') and other complex financial products. Trading CFDs carries a high level
+                            of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all investors because it is possible to lose all of your invested capital. You should never invest money that
+                            you cannot afford to lose. Before trading in the complex financial products offered, please ensure you understand the risks involved.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <a href="terms" class="text-blue-400 hover:text-blue-300 transition">Terms & Conditions</a>
+                            <a href="privacy" class="text-blue-400 hover:text-blue-300 transition">Privacy Policy</a>
+                            <a href="regulation" class="text-blue-400 hover:text-blue-300 transition">Legal Documents</a>
+                        </div>
+                        <p>©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> XYTRION MARKETS. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gtranslate_wrapper hidden lg:block"></div>
+
+        <script>
+            window.gtranslateSettings = {
+
+                default_language: "en",
+
+                alt_flags: {
+                    "en": "usa"
+                },
+
+                wrapper_selector: ".gtranslate_wrapper",
+
+                flag_style: "3d",
+
+            };
+        </script>
+
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+    </footer>
+
+    <!-- Sticky Market Ticker Widget -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Live Chat Button -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .last-widget {
+            position: sticky;
+            z-index: 10;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+
+
+    <div class="last-widget">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+
+
+        <!-- GetButton.io widget -->
+        <!--<script type="text/javascript">-->
+        <!--    (function () {-->
+        <!--        var options = {-->
+        <!--whatsapp: "1234567890", // WhatsApp number-->
+        <!--call_to_action: "Message us", // Call to action-->
+        <!--button_color: "#FF6550", // Color of button-->
+        <!--position: "right", // Position may be 'right' or 'left'-->
+        <!--        };-->
+        <!--        var proto = 'https:', host = "getbutton.io", url = proto + '//static.' + host;-->
+        <!--        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';-->
+        <!--        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };-->
+        <!--        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);-->
+        <!--    })();-->
+        <!--</script>-->
+        <!-- Additional Scripts -->
+        <script>
+            // Live Chat Function
+            function openLiveChat(e) {
+                e.preventDefault();
+                console.log('Opening live chat...');
+                // Implement your live chat functionality here
+            }
+
+            // Theme toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize any custom components
+                console.log('DOM loaded, initializing components...');
+            });
+
+            // Analytics (preserved from original)
+            function bindGAEvents(eventCategory, callback, iter) {
+                if (typeof iter === "undefined") {
+                    iter = 1;
+                }
+                if (window.dataLayer) {
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                } else if (iter > 2 && typeof callback === "function") {
+                    callback();
+                } else {
+                    setTimeout(function() {
+                        bindGAEvents(eventCategory, callback, iter + 1);
+                    }, 500);
+                }
+            }
+
+            $(document).ready(function() {
+                if ('' == '1') {
+                    bindGAEvents('ex_new_user');
+                }
+
+                $(document).on('click', '.start-trading, .open-live-account, .open-demo-account', function(event) {
+                    var redirectLink = $(this).attr('href');
+                    bindGAEvents('ex_button', function() {
+                        window.location.href = redirectLink;
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+
+<script src="/assets/js/app.js"></script>
+        <!-- Shared Live Chat Widget -->
+    <script src="/dashboard/chat-widget.js" defer></script>
+</body>
+
+</html>

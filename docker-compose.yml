@@ -1,0 +1,38 @@
+services:
+  mongo:
+    image: mongo:8
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "try { rs.status().ok } catch (e) { rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok }"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      APP_ORIGIN: ${APP_ORIGIN:-http://localhost:3000}
+      MONGODB_URI: mongodb://mongo:27017/xytrion?replicaSet=rs0
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET to a random value of at least 32 characters}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_ADMIN_CHAT_ID: ${TELEGRAM_ADMIN_CHAT_ID:-}
+      TELEGRAM_ADMIN_USER_IDS: ${TELEGRAM_ADMIN_USER_IDS:-}
+      TELEGRAM_POLLING_ENABLED: ${TELEGRAM_POLLING_ENABLED:-false}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+    ports:
+      - "3000:3000"
+volumes:
+  mongo-data:
