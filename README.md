@@ -32,10 +32,10 @@ SESSION_SECRET='replace-with-a-random-value-of-at-least-32-characters' docker co
 
 ## Required environment variables
 
-| Variable         | Purpose                                                   |
-| ---------------- | --------------------------------------------------------- |
+| Variable | Purpose |
+|---|---|
 | `SESSION_SECRET` | At least 32 characters; signs server-side session cookies |
-| `MONGODB_URI`    | MongoDB replica-set connection string                     |
+| `MONGODB_URI` | MongoDB replica-set connection string |
 
 Telegram credentials are optional. If `TELEGRAM_POLLING_ENABLED=true`, configure `TELEGRAM_BOT_TOKEN`, `TELEGRAM_ADMIN_CHAT_ID`, and preferably `TELEGRAM_ADMIN_USER_IDS`. **Telegram tokens do not send email to users.** Browser code never receives Telegram or SMTP credentials.
 
@@ -63,10 +63,10 @@ If the endpoint reports `"available":false`, run `npm run doctor` and check outb
 
 The UI retrieves wallet configuration from `/api/config/deposit-wallets`:
 
-| Asset | Network | Default address                              |
-| ----- | ------- | -------------------------------------------- |
-| USDT  | TRC20   | `TQiZD8zedxCLZYZXXtx4v6M7biQuzypGFp`         |
-| BTC   | Bitcoin | `bc1qvyumeqtwp0xl4mg8lq0z0wsvmgp76f80ensuxw` |
+| Asset | Network | Default address |
+|---|---|---|
+| USDT | TRC20 | `TQiZD8zedxCLZYZXXtx4v6M7biQuzypGFp` |
+| BTC | Bitcoin | `bc1qvyumeqtwp0xl4mg8lq0z0wsvmgp76f80ensuxw` |
 
 Override either address using the corresponding variables in `.env.example`.
 
@@ -110,7 +110,6 @@ The five plans, category filters, investment modal, amount/balance validation, a
   ```
 
   Port 587 requires STARTTLS. For port 465 set `SMTP_PORT=465` and `SMTP_SECURE=true`. Do **not** put these credentials in frontend JavaScript or a shared ZIP. Docker Compose passes these environment variables through without baking them into its image.
-
 - Restart `npm start`, then run `npm run doctor` to **verify SMTP connection/authentication** without sending a test email. Without complete SMTP settings, account actions still work and emails stay queued in MongoDB; after valid settings are supplied and the server restarts, the outbox attempts pending messages. Failed sends retry with backoff (up to eight attempts), rather than showing a misleading email success message. Confirm actual delivery with your provider's activity logs and a mailbox you control; SMTP acceptance does not guarantee inbox placement.
 
 ## Telegram administration

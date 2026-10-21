@@ -9,7 +9,11 @@
     form.addEventListener('submit', function (event) { event.preventDefault(); event.stopImmediatePropagation(); handler(form); }, true);
   }
   async function saveProfile(form) {
-    var submit = form.querySelector('[type="submit"]'); if (submit) submit.disabled = true;
+    var alpineData = global.Alpine && typeof global.Alpine.$data === 'function' ? global.Alpine.$data(form) : null;
+    if ((alpineData && alpineData.saving) || form.__profileSaveInFlight) return;
+    form.__profileSaveInFlight = true;
+    if (alpineData) alpineData.saving = true;
+    var submit = form.querySelector('[type="submit"]');
     try {
       var data = await global.XytrionApi.request('/api/account', { method: 'PATCH', body: {
         name: form.elements.name.value, phone: form.elements.phone.value, country: form.elements.country.value
@@ -17,7 +21,11 @@
       localStorage.setItem('xytrion_current_user', JSON.stringify(data.user)); global.hydrateUserProfile(data.user);
       await alertUser('Profile Updated', 'Your personal information was saved.', 'success');
     } catch (error) { await alertUser('Update Failed', error.message, 'error'); }
-    finally { if (submit) submit.disabled = false; }
+    finally {
+      form.__profileSaveInFlight = false;
+      if (alpineData) alpineData.saving = false;
+      if (submit) submit.disabled = false;
+    }
   }
   async function changePassword(form) {
     var submit = form.querySelector('[type="submit"]'); if (submit) submit.disabled = true;

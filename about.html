@@ -216,6 +216,8 @@
         });
     </script>
     <link rel="stylesheet" href="/dashboard/chat-widget.css">
+<link rel="stylesheet" href="/assets/css/responsive.css">
+<script defer src="/assets/js/responsive.js"></script>
 </head>
 
 <body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
@@ -257,7 +259,7 @@
                     </div>
 
                     <!-- Main Navigation - Desktop -->
-                    <nav class="hidden md:flex space-x-8">
+                    <nav class="hidden lg:flex space-x-8">
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
                             <span>Trading</span>
@@ -311,7 +313,7 @@
                     </nav>
 
                     <!-- Right Navigation -->
-                    <div class="hidden md:flex items-center">
+                    <div class="hidden lg:flex items-center">
                         <div class="flex space-x-1 mr-4">
                             <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Desktop Version">
                             <i class="fas fa-desktop"></i>
@@ -353,7 +355,7 @@
                     </div>
 
                     <!-- Mobile menu button and theme toggle -->
-                    <div class="flex md:hidden items-center space-x-2">
+                    <div class="flex lg:hidden items-center space-x-2">
                         <!-- Mobile Theme Toggle -->
                         <!--<button-->
                         <!--    x-data-->
@@ -367,7 +369,7 @@
 
                         <!-- Mobile Menu Toggle -->
                         <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu"
-                            aria-expanded="false">
+                            data-responsive-public-toggle aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -381,7 +383,7 @@
             </div>
 
             <!-- Mobile menu -->
-            <div x-show="mobileMenuOpen" class="md:hidden" id="mobile-menu" style="display: none;">
+            <div x-show="mobileMenuOpen" class="lg:hidden" id="mobile-menu" data-responsive-public-menu style="display: none;">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <!-- Mobile Navigation -->
                     <div x-data="{ open: false }" class="py-1">
@@ -471,7 +473,7 @@
                         class="w-full">
                 </iframe>-->
                     <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
+                    <div data-responsive-embed class="tradingview-widget-container">
                         <div class="tradingview-widget-container__widget"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                             {
@@ -763,8 +765,8 @@
                     <div class="w-full lg:w-1/2">
                         <div class="relative">
                             <!-- Decorative elements -->
-                            <div class="absolute -top-4 -left-4 w-24 h-24 bg-blue-500 opacity-20 rounded-full blur-xl"></div>
-                            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-teal-400 opacity-20 rounded-full blur-xl"></div>
+                            <div data-responsive-decoration class="absolute -top-4 -left-4 w-24 h-24 bg-blue-500 opacity-20 rounded-full blur-xl"></div>
+                            <div data-responsive-decoration class="absolute -bottom-4 -right-4 w-32 h-32 bg-teal-400 opacity-20 rounded-full blur-xl"></div>
 
                             <!-- Image -->
                             <div class="relative bg-gray-900 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl overflow-hidden shadow-lg">
@@ -959,8 +961,8 @@
     </footer>
 
     <!-- Sticky Market Ticker Widget -->
-    <div class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
-        <div class="tradingview-widget-container">
+    <div data-responsive-bottom-bar data-responsive-ticker class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
+        <div data-responsive-embed class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                 {
@@ -1008,7 +1010,7 @@
 
     <div class="last-widget">
         <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container">
+        <div data-responsive-embed class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget"></div>
 
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
