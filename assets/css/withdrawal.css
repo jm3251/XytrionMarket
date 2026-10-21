@@ -1,0 +1,239 @@
+/* Withdrawal page responsive overrides are intentionally scoped to this page. */
+.withdrawal-modal-shell {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 1rem;
+}
+
+.withdrawal-modal {
+    overscroll-behavior: contain;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .withdrawal-page {
+        padding: 1.5rem 0 5rem !important;
+    }
+
+    .withdrawal-container {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .withdrawal-page-heading {
+        gap: 1rem;
+        margin-bottom: 1.25rem !important;
+    }
+
+    .withdrawal-page-heading h1 {
+        font-size: 1.875rem;
+    }
+
+    .withdrawal-dashboard-link {
+        padding: .625rem 1rem !important;
+        white-space: nowrap;
+    }
+
+    .withdrawal-breadcrumb {
+        margin-bottom: 1.25rem !important;
+    }
+
+    .withdrawal-form-card,
+    .withdrawal-info-card {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .withdrawal-form-card-header,
+    .withdrawal-form,
+    .withdrawal-info-card {
+        padding: 1.25rem !important;
+    }
+
+    .withdrawal-info-card {
+        margin-top: 1.25rem !important;
+    }
+
+    .withdrawal-submit-button {
+        width: 100% !important;
+    }
+
+    .withdrawal-modal-card {
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .withdrawal-page {
+        padding: 1rem 0 4.5rem !important;
+    }
+
+    .withdrawal-container {
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: .75rem !important;
+        padding-right: .75rem !important;
+    }
+
+    .withdrawal-page-heading {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: .625rem;
+        margin-bottom: 1rem !important;
+    }
+
+    .withdrawal-page-heading h1 {
+        font-size: 1.5rem;
+        line-height: 1.25;
+    }
+
+    .withdrawal-page-heading p {
+        margin-top: .25rem !important;
+        font-size: .8125rem;
+        line-height: 1.35;
+    }
+
+    .withdrawal-dashboard-link {
+        padding: .5rem .75rem !important;
+        font-size: .75rem !important;
+        line-height: 1.25;
+        white-space: nowrap;
+    }
+
+    .withdrawal-dashboard-link svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .withdrawal-breadcrumb {
+        margin-bottom: 1rem !important;
+        font-size: .75rem;
+    }
+
+    .withdrawal-breadcrumb ol {
+        flex-wrap: wrap;
+        row-gap: .25rem;
+    }
+
+    .withdrawal-breadcrumb ol > li + li {
+        margin-left: 0 !important;
+    }
+
+    .withdrawal-breadcrumb a,
+    .withdrawal-breadcrumb span {
+        font-size: .75rem !important;
+    }
+
+    .withdrawal-form-card,
+    .withdrawal-info-card {
+        width: 100% !important;
+        max-width: none !important;
+        border-radius: 1rem;
+    }
+
+    .withdrawal-form-card-header,
+    .withdrawal-form,
+    .withdrawal-info-card {
+        padding: 1rem !important;
+    }
+
+    .withdrawal-form-card-header {
+        gap: .75rem;
+    }
+
+    .withdrawal-form-card-header > .flex {
+        gap: .75rem;
+    }
+
+    .withdrawal-form-card-header > div:first-child {
+        padding: .625rem !important;
+    }
+
+    .withdrawal-form-card-header h2 {
+        font-size: 1.125rem;
+        line-height: 1.3;
+    }
+
+    .withdrawal-form-card-header p {
+        margin-top: .125rem;
+        font-size: .75rem;
+    }
+
+    .withdrawal-form > div {
+        margin-bottom: 1rem !important;
+    }
+
+    .withdrawal-form > div:last-child {
+        margin-top: 1rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    .withdrawal-form label,
+    .withdrawal-wallet-field p,
+    .withdrawal-wallet-field input {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .withdrawal-wallet-field label,
+    .withdrawal-wallet-field p {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .withdrawal-wallet-field input {
+        width: 100% !important;
+        text-overflow: clip;
+    }
+
+    .withdrawal-submit-button {
+        width: 100% !important;
+        margin-top: .25rem;
+        padding: .75rem 1rem !important;
+    }
+
+    .withdrawal-info-card {
+        margin-top: 1rem !important;
+    }
+
+    .withdrawal-info-card > div:last-child {
+        padding-left: 0 !important;
+    }
+
+    .withdrawal-modal {
+        height: 100dvh;
+        max-height: 100dvh;
+    }
+
+    .withdrawal-modal-shell {
+        min-height: 100%;
+        padding: max(.75rem, env(safe-area-inset-top)) max(.75rem, env(safe-area-inset-right)) max(.75rem, env(safe-area-inset-bottom)) max(.75rem, env(safe-area-inset-left));
+    }
+
+    .withdrawal-modal-card {
+        width: 100% !important;
+        max-height: calc(100dvh - 1.5rem);
+        overflow-y: auto;
+        padding: 1rem !important;
+    }
+
+    .withdrawal-modal-card p {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .withdrawal-modal-card > div > div:last-child {
+        flex-wrap: wrap;
+        gap: .625rem;
+    }
+
+    .withdrawal-modal-card > div > div:last-child button {
+        flex: 1 1 8rem;
+        min-height: 2.75rem;
+    }
+}

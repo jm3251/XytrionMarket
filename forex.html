@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#6366F1',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        dark: {
+                            100: '#374151',
+                            200: '#1F2937',
+                            300: '#111827',
+                            400: '#0F172A',
+                            500: '#0B1120',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Alpine.js x-cloak directive */
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Custom scrollbar for dark mode */
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1F2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280;
+        }
+
+        /* Form elements styling */
+
+        .form-input {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .form-select {
+            @apply bg-dark-100 border-0 rounded-lg px-4 py-3 text-gray-100 font-medium focus: ring-2 focus:ring-primary focus:outline-none transition-all duration-200;
+        }
+
+        .btn-primary {
+            @apply bg-primary hover: bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        .btn-secondary {
+            @apply bg-dark-100 hover: bg-dark-200 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200;
+        }
+
+        /* Navbar and mobile menu animations */
+
+        .navbar-dropdown {
+            @apply transition-all duration-300 ease-in-out transform origin-top;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        /* Light mode overrides */
+
+        html:not(.dark) {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) body {
+            @apply bg-gray-100 text-gray-900;
+        }
+
+        html:not(.dark) .bg-dark-400 {
+            @apply bg-white;
+        }
+
+        html:not(.dark) .bg-dark-300 {
+            @apply bg-gray-50;
+        }
+
+        html:not(.dark) .border-gray-800 {
+            @apply border-gray-200;
+        }
+
+        html:not(.dark) .text-gray-200,
+        html:not(.dark) .text-gray-300,
+        html:not(.dark) .text-gray-400 {
+            @apply text-gray-700;
+        }
+
+        html:not(.dark) .hover\:bg-dark-200:hover,
+        html:not(.dark) .hover\:bg-gray-700:hover {
+            @apply hover: bg-gray-200;
+        }
+
+        html:not(.dark) .bg-dark-500 {
+            @apply bg-gray-100;
+        }
+    </style>
+
+    <title>XYTRION MARKETS | CFD Trading — Trading on Stocks, Gold, Oil, Indices</title>
+    <link rel="manifest" href="./">
+    <meta name="theme-color" content="#111827">
+    <meta property="x-session-id" content="ghJjEOrjZ3KUPun1UQksVUbvK88y21dgIhKtb8GT">
+    <meta property="og:site_name" content="XYTRION MARKETS">
+    <meta property="og:description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="description" content="CFD Trading with XYTRION MARKETS. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
+    <meta name="keywords" content="forex, CFDs, CFD, Bitcoin trading, crypto trading, online trading, Forex trading, Oil trading, Gold trading, trading indexes, shares trading, commodities trading, trading platform, Cryptocurrencies day trading">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CFD Trading — Trading on Stocks, Gold, Oil, Indices | XYTRION MARKETS">
+    <meta property="og:image" content="img/share.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/storage/app/public/photos/LwmPzjLpWvqARLQerBqGjF6TGPAaVzudiJtGU1Is.png" type="image/x-icon">
+
+    <!-- Preload key assets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- jQuery (required for some components) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JavaScript utilities -->
+    <script>
+        // Utility function for mobile menu
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('navigation', {
+                open: false,
+                toggle() {
+                    this.open = !this.open;
+                },
+                close() {
+                    this.open = false;
+                }
+            });
+
+            // Theme toggler
+            Alpine.store('darkMode', {
+                on: true,
+                toggle() {
+                    this.on = !this.on;
+                    if (this.on) {
+                        document.documentElement.classList.add('dark');
+                        document.body.classList.add('bg-gray-900');
+                        document.body.classList.remove('bg-gray-100');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        document.body.classList.remove('bg-gray-900');
+                        document.body.classList.add('bg-gray-100');
+                    }
+                    localStorage.setItem('darkMode', this.on ? 'dark' : 'light');
+                }
+            });
+        });
+
+        // Initialize theme from local storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const theme = localStorage.getItem('darkMode');
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('bg-gray-900');
+                document.body.classList.add('bg-gray-100');
+                if (window.Alpine) {
+                    Alpine.store('darkMode').on = false;
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="/dashboard/chat-widget.css">
+<link rel="stylesheet" href="/assets/css/responsive.css?v=20261021-balance-withdraw">
+<script defer src="/assets/js/responsive.js"></script>
+</head>
+
+<body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:bg-blue-700 focus:text-white focus:fixed focus:px-4 focus:py-2 focus:top-2 focus:left-2 focus:z-50">
+        Skip to main content
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Header -->
+    <header class="bg-gray-900 border-b border-gray-800 relative z-50">
+        <!-- Top Navigation Bar -->
+        <div x-data="{ mobileMenuOpen: false }" class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="/" class="flex items-center justify-start leading-none">
+                        <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                    </a>
+                    </div>
+
+                    <!-- Main Navigation - Desktop -->
+                    <nav class="hidden lg:flex space-x-8">
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Trading</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Cryptocurrencies</a>
+                                <a href="forex" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Forex</a>
+                                <a href="shares" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Shares</a>
+                                <a href="indices" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Indices</a>
+                                <a href="etfs" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">ETFs</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>System</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="trade" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Trade</a>
+                                <a href="copy" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Copy Trading</a>
+                                <a href="automate" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Automated Trading</a>
+                            </div>
+                        </div>
+
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" @click.away="open = false" class="group inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white focus:outline-none">
+                            <span>Company</span>
+                            <svg class="ml-2 h-4 w-4 text-gray-400 group-hover:text-gray-300" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1" class="absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                <a href="about" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">About Us</a>
+                                <a href="why-us" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Why Us</a>
+                                <a href="faq" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">FAQ</a>
+                                <a href="regulation" class="block px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">Legal & Regulation</a>
+                            </div>
+                        </div>
+
+                        <a href="for-traders" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Education</a>
+                        <a href="contacts" class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-200 hover:text-white">Contact</a>
+                    </nav>
+
+                    <!-- Right Navigation -->
+                    <div class="hidden lg:flex items-center">
+                        <div class="flex space-x-1 mr-4">
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Desktop Version">
+                            <i class="fas fa-desktop"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Windows App">
+                            <i class="fab fa-windows"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="Android App">
+                            <i class="fab fa-android"></i>
+                        </a>
+                            <a href="#" class="text-gray-400 hover:text-gray-200 p-1" aria-label="iOS App">
+                            <i class="fab fa-apple"></i>
+                        </a>
+                        </div>
+
+                        <!-- Language Selector (Desktop) -->
+
+
+                        <!-- Dark/Light Mode Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-gray-200 mr-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon"></i>-->
+                        <!--</button>-->
+
+                        <div class="flex items-center space-x-4">
+                            <a href="login" class="text-gray-200 hover:text-white flex items-center">
+                            <i class="fas fa-lock mr-1"></i>
+                            <span>Log in</span>
+                        </a>
+                            <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
+                            Sign up
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button and theme toggle -->
+                    <div class="flex lg:hidden items-center space-x-2">
+                        <!-- Mobile Theme Toggle -->
+                        <!--<button-->
+                        <!--    x-data-->
+                        <!--    @click="$store.darkMode.toggle()"-->
+                        <!--    class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"-->
+                        <!--    aria-label="Toggle dark/light mode"-->
+                        <!-->-->
+                        <!--    <i x-show="$store.darkMode.on" class="fas fa-sun text-lg"></i>-->
+                        <!--    <i x-show="!$store.darkMode.on" class="fas fa-moon text-lg"></i>-->
+                        <!--</button>-->
+
+                        <!-- Mobile Menu Toggle -->
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu"
+                            data-responsive-public-toggle aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg x-show="!mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg x-show="mobileMenuOpen" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" style="display: none;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenuOpen" class="lg:hidden" id="mobile-menu" data-responsive-public-menu style="display: none;">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <!-- Mobile Navigation -->
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Trading</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="cryptocurrencies" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Cryptocurrencies</a>
+                            <a href="forex" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Forex</a>
+                            <a href="shares" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Shares</a>
+                            <a href="indices" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Indices</a>
+                            <a href="etfs" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">ETFs</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>System</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="trade" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Trade</a>
+                            <a href="copy" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Copy Trading</a>
+                            <a href="automate" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Automated Trading</a>
+                        </div>
+                    </div>
+
+                    <div x-data="{ open: false }" class="py-1">
+                        <button @click="open = !open" class="w-full flex justify-between items-center px-4 py-2 text-sm text-gray-200 hover:bg-gray-700">
+                        <span>Company</span>
+                        <svg class="h-4 w-4 text-gray-400" :class="{'transform rotate-180': open}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                        <div x-show="open" class="pl-4">
+                            <a href="about" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">About Us</a>
+                            <a href="why-us" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Why Us</a>
+                            <a href="faq" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">FAQ</a>
+                            <a href="regulation" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Legal & Regulation</a>
+                        </div>
+                    </div>
+
+                    <a href="for-traders" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Education</a>
+                    <a href="contacts" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700">Contact</a>
+
+                    <!-- Language Selector (Mobile) -->
+
+                    <div class="pt-4 pb-3 border-t border-gray-700">
+                        <div class="flex items-center justify-between px-4">
+                            <div class="flex items-center space-x-3">
+                                <a href="login" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-lock mr-1"></i> Log in
+                            </a>
+                                <a href="register" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                                Sign up
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--  sub menu -->
+
+    <!-- Market Ticker Widget -->
+    <div class="bg-dark-300 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+            <div class="py-0">
+                <div class="crypto-ticker-wrapper-">
+                    <!-- <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no"
+                        width="100%"
+                        height="36px"
+                        scrolling="auto"
+                        marginwidth="0"
+                        marginheight="0"
+                        frameborder="0"
+                        border="0"
+                        class="w-full">
+                </iframe>-->
+                    <!-- TradingView Widget BEGIN -->
+                    <div data-responsive-embed class="tradingview-widget-container">
+                        <div class="tradingview-widget-container__widget"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                            {
+                                "symbols": [{
+                                        "proName": "FOREXCOM:SPXUSD",
+                                        "title": "S&P 500"
+                                    },
+                                    {
+                                        "proName": "FOREXCOM:NSXUSD",
+                                        "title": "Nasdaq 100"
+                                    },
+                                    {
+                                        "proName": "FX_IDC:EURUSD",
+                                        "title": "EUR/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:BTCUSD",
+                                        "title": "BTC/USD"
+                                    },
+                                    {
+                                        "proName": "BITSTAMP:ETHUSD",
+                                        "title": "ETH/USD"
+                                    }
+                                ],
+                                "showSymbolLogo": true,
+                                "colorTheme": "dark",
+                                "isTransparent": true,
+                                "displayMode": "adaptive",
+                                "locale": "en"
+                            }
+                        </script>
+                    </div>
+                    <!-- TradingView Widget END -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+            <!-- Abstract Background Elements -->
+            <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+                <!-- Abstract Forex Chart Pattern -->
+                <div class="absolute top-0 right-0 w-full h-full">
+                    <svg class="absolute top-0 right-0 w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="forexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop stop-color="#3B82F6" stop-opacity=".25" offset="0%"/>
+                        <stop stop-color="#10B981" stop-opacity=".2" offset="50%"/>
+                        <stop stop-color="#6366F1" stop-opacity=".15" offset="100%"/>
+                    </linearGradient>
+                </defs>
+                <!-- Forex candlestick chart-inspired shape -->
+                <path d="M120,300 L120,200 L150,200 L150,300 Z" fill="rgba(16, 185, 129, 0.5)"/>
+                <path d="M120,200 L120,300 L150,300 L150,200 Z" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M135,150 L135,350" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2"/>
+
+                <path d="M220,250 L220,400 L250,400 L250,250 Z" fill="rgba(239, 68, 68, 0.5)"/>
+                <path d="M220,250 L220,400 L250,400 L250,250 Z" stroke="rgba(239, 68, 68, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M235,200 L235,450" stroke="rgba(239, 68, 68, 0.5)" stroke-width="2"/>
+
+                <path d="M320,320 L320,220 L350,220 L350,320 Z" fill="rgba(16, 185, 129, 0.5)"/>
+                <path d="M320,220 L320,320 L350,320 L350,220 Z" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M335,170 L335,370" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2"/>
+
+                <path d="M420,280 L420,380 L450,380 L450,280 Z" fill="rgba(239, 68, 68, 0.5)"/>
+                <path d="M420,280 L420,380 L450,380 L450,280 Z" stroke="rgba(239, 68, 68, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M435,230 L435,430" stroke="rgba(239, 68, 68, 0.5)" stroke-width="2"/>
+
+                <path d="M520,350 L520,250 L550,250 L550,350 Z" fill="rgba(16, 185, 129, 0.5)"/>
+                <path d="M520,250 L520,350 L550,350 L550,250 Z" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M535,200 L535,400" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2"/>
+
+                <path d="M620,300 L620,200 L650,200 L650,300 Z" fill="rgba(16, 185, 129, 0.5)"/>
+                <path d="M620,200 L620,300 L650,300 L650,200 Z" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2" fill="none"/>
+                <path d="M635,150 L635,350" stroke="rgba(16, 185, 129, 0.5)" stroke-width="2"/>
+            </svg>
+                </div>
+                <!-- Network Connections -->
+                <div class="absolute inset-0">
+                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#6366F1" stroke-width="2" opacity="0.15">
+                    <path d="M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737 520 660 309 538 40 599 295 764"/>
+                    <path d="M-4 44L190 190 731 737M490 85L309 538 40 599 295 764"/>
+                </g>
+            </svg>
+                </div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 px-4 py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center">
+                    <div class="w-full lg:w-2/3 mb-8 lg:mb-0" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 200)">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform translate-y-8" x-transition:enter-end="opacity-100 transform translate-y-0" class="space-y-6">
+                            <div class="inline-block px-3 py-1 mb-2 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                                Global Markets
+                            </div>
+                            <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                                <span class="block">Forex</span>
+                                <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-green-400">Foreign Exchange Market</span>
+                            </h1>
+                            <p class="mt-3 text-lg text-gray-300 max-w-2xl">
+                                The foreign exchange market is a global decentralized or over-the-counter market for the trading of currencies. This market determines foreign exchange rates for every currency. It includes all aspects of buying, selling and exchanging currencies at current
+                                or determined prices.
+                            </p>
+                            <div class="flex flex-wrap gap-4 mt-6">
+                                <a href="#forex-markets" class="px-6 py-3 text-base font-medium text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+                            Explore Markets
+                        </a>
+                                <a href="/register" class="px-6 py-3 text-base font-medium text-gray-300 bg-gray-800 border border-gray-700 rounded-lg shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-200">
+                            Start Trading
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/3" x-data="{ isVisible: false }" x-init="setTimeout(() => { isVisible = true }, 500)">
+                        <div x-show="isVisible" x-transition:enter="transition ease-out duration-500 delay-300" x-transition:enter-start="opacity-0 transform translate-y-12" x-transition:enter-end="opacity-100 transform translate-y-0" class="relative">
+                            <!-- Currency Pair Cards -->
+                            <div class="grid gap-4">
+                                <!-- EUR/USD -->
+                                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4 rounded-xl border border-gray-700 transform hover:translate-y-[-5px] transition-all duration-300">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center text-blue-400 font-bold mr-3">
+                                                €/$
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-bold text-white">EUR/USD</h3>
+                                                <p class="text-sm text-gray-400">Euro / US Dollar</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-green-400 font-medium">1.1842</div>
+                                            <div class="text-xs text-green-400">+0.05%</div>
+                                        </div>
+                                    </div>
+                                    <!-- Mini Chart -->
+                                    <div class="mt-3 h-10">
+                                        <svg class="w-full h-full" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0,15 L10,13 L20,16 L30,14 L40,17 L50,12 L60,15 L70,10 L80,13 L90,11 L100,8" fill="none" stroke="#10B981" stroke-width="2"/>
+                                </svg>
+                                    </div>
+                                </div>
+
+                                <!-- GBP/USD -->
+                                <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm p-4 rounded-xl border border-gray-700 transform hover:translate-y-[-5px] transition-all duration-300">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-indigo-600 bg-opacity-20 rounded-full flex items-center justify-center text-indigo-400 font-bold mr-3">
+                                                £/$
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-bold text-white">GBP/USD</h3>
+                                                <p class="text-sm text-gray-400">British Pound / US Dollar</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-red-400 font-medium">1.3721</div>
+                                            <div class="text-xs text-red-400">-0.12%</div>
+                                        </div>
+                                    </div>
+                                    <!-- Mini Chart -->
+                                    <div class="mt-3 h-10">
+                                        <svg class="w-full h-full" viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0,10 L10,12 L20,8 L30,14 L40,16 L50,15 L60,18 L70,20 L80,17 L90,19 L100,22" fill="none" stroke="#EF4444" stroke-width="2"/>
+                                </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Decorative Elements -->
+                            <div data-responsive-decoration class="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                            <div data-responsive-decoration class="absolute -top-6 -left-6 w-24 h-24 bg-green-500 bg-opacity-20 rounded-full filter blur-xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        </div>
+        </div>
+        </div>
+        </section>
+
+        <!-- Forex Market Overview Section -->
+        <section class="py-16 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Major Currency Pairs
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Market Overview</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Track performance across major currency pairs with real-time data and live spreads
+                    </p>
+                </div>
+
+                <!-- Currency Pair Categories -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+                    <!-- Category 1 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 cursor-pointer" x-data="{}" @click="document.querySelector('.selfi').value='Major'; document.querySelector('.selfi').dispatchEvent(new Event('change'))">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-white">Major</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs">EUR/USD, GBP/USD, USD/JPY, USD/CHF</p>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 cursor-pointer" x-data="{}" @click="document.querySelector('.selfi').value='Minor'; document.querySelector('.selfi').dispatchEvent(new Event('change'))">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-white">Minor</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs">EUR/GBP, EUR/CHF, GBP/JPY, EUR/JPY</p>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 cursor-pointer" x-data="{}" @click="document.querySelector('.selfi').value='Exotic'; document.querySelector('.selfi').dispatchEvent(new Event('change'))">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-white">Exotic</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs">USD/TRY, USD/ZAR, EUR/HUF, USD/MXN</p>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 cursor-pointer" x-data="{}" @click="document.querySelector('.selfi').value='Australasian'; document.querySelector('.selfi').dispatchEvent(new Event('change'))">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-white">Australasian</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs">AUD/USD, NZD/USD, AUD/NZD, AUD/JPY</p>
+                    </div>
+
+                    <!-- Category 5 -->
+                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700 hover:border-blue-400 transition-all duration-300 cursor-pointer" x-data="{}" @click="document.querySelector('.selfi').value='Scandinavian'; document.querySelector('.selfi').dispatchEvent(new Event('change'))">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                            </div>
+                            <h3 class="text-base font-bold text-white">Scandinavian</h3>
+                        </div>
+                        <p class="text-gray-400 text-xs">EUR/NOK, EUR/SEK, USD/NOK, USD/SEK</p>
+                    </div>
+                </div>
+
+                <!-- Forex Markets Table -->
+                <div id="forex-markets" class="bg-gray-800 bg-opacity-50 backdrop-blur-sm rounded-xl border border-gray-700 overflow-hidden shadow-lg">
+                    <div class="p-6 border-b border-gray-700">
+                        <h3 class="text-xl font-bold text-white">Forex - Spreads & Trading Conditions</h3>
+                    </div>
+
+                    <!-- Search and Filter Controls -->
+                    <div class="p-4 border-b border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="w-full md:w-64">
+                            <select class="selfi bg-gray-900 border border-gray-700 rounded-lg py-2 px-4 w-full text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option data-id="all">All</option>
+                        <option data-id="0">Australasian</option>
+                        <option data-id="1">Minor</option>
+                        <option data-id="2">Major</option>
+                        <option data-id="3">Exotic</option>
+                        <option data-id="4">Scandinavian</option>
+                    </select>
+                        </div>
+                        <div class="relative w-full md:w-64">
+                            <input type="text" class="search-box w-full bg-gray-900 border border-gray-700 rounded-lg py-2 px-4 pl-10 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Search all instruments">
+                            <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                        </div>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="relative overflow-x-auto pat loading" style="min-height: 400px;">
+                        <div class="loader absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full animate-spin border-4 border-solid border-blue-500 border-t-transparent"></div>
+                        </div>
+
+                        <table id="tt-spreads-6023e30e3ba10" class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-xs uppercase bg-gray-800 text-gray-400">
+                                <tr>
+                                    <th class="px-6 py-3 symbol">Symbol</th>
+                                    <th class="px-6 py-3 category">Category</th>
+                                    <th class="px-6 py-3 leverage">Leverage</th>
+                                    <th class="px-6 py-3 lot_size">Lot Size</th>
+                                    <th class="px-6 py-3 min_lot_size">Min Lot Size</th>
+                                    <th class="px-6 py-3 commission">Commission</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-gray-900 divide-y divide-gray-800">
+                                <tr class="hover:bg-gray-800 transition-colors duration-200">
+                                    <td class="px-6 py-4 symbol">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mr-3 text-xs text-blue-400 font-medium">A/C</div>
+                                            <a href="#" class="text-blue-400 hover:text-blue-300">AUD/CAD</a>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 symbol">Australasian</td>
+                                    <td class="px-6 py-4 category">1:500</td>
+                                    <td class="px-6 py-4 leverage">100000 AUD</td>
+                                    <td class="px-6 py-4 lot_size">0.01</td>
+                                    <td class="px-6 py-4 min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/CHF" href="#"> AUD/CHF </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/JPY" href="#"> AUD/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/NZD" href="#"> AUD/NZD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/SGD" href="#"> AUD/SGD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/USD" href="#"> AUD/USD </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="AUD/ZAR" href="#"> AUD/ZAR </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 AUD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CAD/CHF" href="#"> CAD/CHF </a></td>
+                                    <td class="symbol">Minor</td>
+
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CAD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CAD/JPY" href="#"> CAD/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CAD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CAD/MXN" href="#"> CAD/MXN </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CAD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CHF/JPY" href="#"> CHF/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CHF</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CHF/NOK" href="#"> CHF/NOK </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CHF</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="CHF/SGD" href="#"> CHF/SGD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 CHF</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/AUD" href="#"> EUR/AUD </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/CAD" href="#"> EUR/CAD </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/CHF" href="#"> EUR/CHF </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/GBP" href="#"> EUR/GBP </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/HUF" href="#"> EUR/HUF </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/JPY" href="#"> EUR/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/MXN" href="#"> EUR/MXN </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/NOK" href="#"> EUR/NOK </a></td>
+                                    <td class="symbol">Scandinavian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/NZD" href="#"> EUR/NZD </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/PLN" href="#"> EUR/PLN </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/RON" href="#"> EUR/RON </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/RUB" href="#"> EUR/RUB </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/SEK" href="#"> EUR/SEK </a></td>
+                                    <td class="symbol">Scandinavian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/SGD" href="#"> EUR/SGD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/TRY" href="#"> EUR/TRY </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/USD" href="#"> EUR/USD </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="EUR/ZAR" href="#"> EUR/ZAR </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 EUR</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/AUD" href="#"> GBP/AUD </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/CAD" href="#"> GBP/CAD </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/CHF" href="#"> GBP/CHF </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/DKK" href="#"> GBP/DKK </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/JPY" href="#"> GBP/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/NOK" href="#"> GBP/NOK </a></td>
+                                    <td class="symbol">Scandinavian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/NZD" href="#"> GBP/NZD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/SEK" href="#"> GBP/SEK </a></td>
+                                    <td class="symbol">Scandinavian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/SGD" href="#"> GBP/SGD </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/USD" href="#"> GBP/USD </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="GBP/ZAR" href="#"> GBP/ZAR </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 GBP</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NOK/JPY" href="#"> NOK/JPY </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NOK</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NOK/SEK" href="#"> NOK/SEK </a></td>
+                                    <td class="symbol">Scandinavian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NOK</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NZD/CAD" href="#"> NZD/CAD </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NZD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NZD/CHF" href="#"> NZD/CHF </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NZD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NZD/JPY" href="#"> NZD/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NZD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NZD/SGD" href="#"> NZD/SGD </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NZD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="NZD/USD" href="#"> NZD/USD </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 NZD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="SEK/JPY" href="#"> SEK/JPY </a></td>
+                                    <td class="symbol">Minor</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 SEK</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="SGD/JPY" href="#"> SGD/JPY </a></td>
+                                    <td class="symbol">Australasian</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 SGD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/CAD" href="#"> USD/CAD </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/CHF" href="#"> USD/CHF </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/CNH" href="#"> USD/CNH </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/CZK" href="#"> USD/CZK </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/DKK" href="#"> USD/DKK </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/HUF" href="#"> USD/HUF </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/JPY" href="#"> USD/JPY </a></td>
+                                    <td class="symbol">Major</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/MXN" href="#"> USD/MXN </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/NOK" href="#"> USD/NOK </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/PLN" href="#"> USD/PLN </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/RON" href="#"> USD/RON </a></td>
+                                    <td class="symbol"></td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/RUB" href="#"> USD/RUB </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/SEK" href="#"> USD/SEK </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/SGD" href="#"> USD/SGD </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/TRY" href="#"> USD/TRY </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                                <tr>
+                                    <td class="symbol"><a title="USD/ZAR" href="#"> USD/ZAR </a></td>
+                                    <td class="symbol">Exotic</td>
+                                    <td class="category">1:500</td>
+                                    <td class="leverage">100000 USD</td>
+                                    <td class="lot_size">0.01</td>
+                                    <td class="min_lot_size">$2.50 per $100K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forex Trading Features Section -->
+        <section class="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Why Trade Forex
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Advanced Forex Trading Features</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Discover the advantages of forex trading on our platform
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Competitive Spreads</h3>
+                        <p class="text-gray-300">Trade with some of the tightest spreads in the industry across major, minor, and exotic currency pairs, providing cost-effective trading opportunities.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Powerful Leverage</h3>
+                        <p class="text-gray-300">Access up to 1:500 leverage to maximize your trading potential and capitalize on even the smallest price movements in the forex market.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                        <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Advanced Risk Management</h3>
+                        <p class="text-gray-300">Utilize stop loss, take profit, and guaranteed stop loss orders to protect your positions and manage risk effectively in volatile market conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script type=text/javascript>
+            $(function() {
+                if (!$.fn.DataTable) {
+                    document.querySelectorAll('table[id^="tt-spreads"]').forEach(function(table) {
+                        const body = table.querySelector('tbody');
+                        if (body && !body.children.length) body.innerHTML = '<tr><td colspan="8" class="px-6 py-6 text-center">This legacy quote widget is unavailable. <a class="text-blue-400 underline" href="/dashboard/trade.html">Open Live Markets</a> for the supported live cryptocurrency feed.</td></tr>';
+                    });
+                    return;
+                }
+                var $dttble = $('#tt-spreads-6023e30e3ba10').DataTable({
+                    "scrollY": "50vh",
+                    "scrollCollapse": true,
+                    "responsive": true,
+                    "paging": false,
+                    "ordering": false,
+                    "searching": true,
+                    "language": {
+                        "zeroRecords": "No matching records found"
+                    },
+                    "columnDefs": [{
+                        targets: ['category', 'sub_category'],
+                        visible: false
+                    }],
+                    "drawCallback": function(settings) {
+                        $('.dataTables_scrollHead').css('width', '100%');
+                        $('.dataTables_scrollHeadInner').css('width', '100%');
+                        $('.dataTables_scrollHeadInner').find('.dataTable').css('width', '100%');
+                    },
+                    initComplete: function() {
+                        $('.loader').hide();
+                        $('.pat').removeClass('loading');
+                        $('.search-box').keyup(function() {
+                            $dttble.search(this.value).draw();
+                        });
+                        let index = parseInt('1');
+                        $('.selfi').change(function() {
+                            if (this.value === "All") {
+                                $dttble.column(index).search('').draw();
+                                $('.subselfi option').show();
+                            } else {
+                                $dttble.column(index).search(this.value).draw();
+                                if ('undefined' !== typeof subindex) {
+                                    let id = $(this).find(':selected').attr('data-id');
+                                    $('.subselfi option').hide();
+                                    $('.subselfi option[data-parent="' + id + '"]').show();
+                                }
+                            }
+                            if ('undefined' !== typeof subindex) {
+                                $dttble.column(subindex).search('').draw();
+                                $('.subselfi option[data-parent="all"]').show();
+                                $('.subselfi option[data-parent="all"]').prop('selected', true);
+                            }
+                        });
+                    }
+                });
+
+                var tabs = $('.tabs .tab').on('click', function($event) {
+                    $event.preventDefault();
+                    tabs.removeClass('current');
+                    $(this).addClass('current');
+                    var target = $(this).data('target');
+                    $('.tabs-content .tab-content').css({
+                        'height': 0,
+                        'display': 'none'
+                    }).parent().find('.' + target).css({
+                        'height': '100%',
+                        'display': 'block',
+                    });
+                    $dttble.columns.adjust().draw();
+                    return false;
+                });
+
+                $(window).on('load', function() {
+                    AOS.refresh();
+                    $dttble.columns.adjust().draw();
+                });
+
+                $(window).on('resize', function() {
+                    setTimeout(function() {
+                        AOS.refresh();
+                        $dttble.columns.adjust().draw();
+                    }, 250);
+                });
+            });
+        </script>
+
+        <!-- Trading Tools Section -->
+        <section class="py-16 bg-gray-900 relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMzBoNjB2NjBoLTYweiIgZmlsbD0iIzMzMyIgZmlsbC1vcGFjaXR5PSIuMSIvPjwvc3ZnPg==')] bg-[length:30px_30px]"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Advanced Tools
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">Professional Forex Trading Tools</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Take advantage of our cutting-edge tools designed for forex traders
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <div class="space-y-8">
+                            <!-- Tool 1 -->
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-medium text-white">Real-time Market Analysis</h3>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        Access in-depth market analysis with real-time data feeds, economic calendars, and market news to make informed trading decisions.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tool 2 -->
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-medium text-white">Economic Calendar</h3>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        Stay updated with upcoming economic events and announcements that impact currency markets with our comprehensive economic calendar.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tool 3 -->
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                                </svg>
+                                    </div>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-medium text-white">Advanced Charts</h3>
+                                    <p class="mt-2 text-base text-gray-300">
+                                        Utilize our sophisticated charting tools with over 50 technical indicators and drawing tools to analyze market trends and patterns.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-sm border border-gray-700 rounded-2xl p-8 shadow-xl">
+                            <div class="relative overflow-hidden rounded-xl">
+                                <!-- Chart image placeholder -->
+                                <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-lg overflow-hidden">
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-full h-full bg-gradient-to-br from-blue-500/20 to-indigo-600/20">
+                                            <!-- Forex chart mockup -->
+                                            <svg class="w-full h-full" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Chart background -->
+                                        <rect width="800" height="450" fill="none" />
+
+                                        <!-- Chart grid -->
+                                        <g stroke="#2D3748" stroke-width="0.5" opacity="0.5">
+                                            <line x1="0" y1="50" x2="800" y2="50" />
+                                            <line x1="0" y1="100" x2="800" y2="100" />
+                                            <line x1="0" y1="150" x2="800" y2="150" />
+                                            <line x1="0" y1="200" x2="800" y2="200" />
+                                            <line x1="0" y1="250" x2="800" y2="250" />
+                                            <line x1="0" y1="300" x2="800" y2="300" />
+                                            <line x1="0" y1="350" x2="800" y2="350" />
+                                            <line x1="0" y1="400" x2="800" y2="400" />
+
+                                            <line x1="100" y1="0" x2="100" y2="450" />
+                                            <line x1="200" y1="0" x2="200" y2="450" />
+                                            <line x1="300" y1="0" x2="300" y2="450" />
+                                            <line x1="400" y1="0" x2="400" y2="450" />
+                                            <line x1="500" y1="0" x2="500" y2="450" />
+                                            <line x1="600" y1="0" x2="600" y2="450" />
+                                            <line x1="700" y1="0" x2="700" y2="450" />
+                                        </g>
+
+                                        <!-- Price line -->
+                                        <path d="M0,300 L50,280 L100,290 L150,260 L200,240 L250,250 L300,220 L350,230 L400,200 L450,180 L500,210 L550,190 L600,170 L650,180 L700,150 L750,160 L800,130"
+                                              fill="none" stroke="#3B82F6" stroke-width="2" />
+
+                                        <!-- Area under the chart -->
+                                        <path d="M0,300 L50,280 L100,290 L150,260 L200,240 L250,250 L300,220 L350,230 L400,200 L450,180 L500,210 L550,190 L600,170 L650,180 L700,150 L750,160 L800,130 L800,450 L0,450 Z"
+                                              fill="url(#forexChartGrad)" opacity="0.2" />
+
+                                        <!-- Candlesticks -->
+                                        <g>
+                                            <!-- Bullish candles -->
+                                            <rect x="120" y="290" width="10" height="30" fill="#10B981" />
+                                            <line x1="125" y1="280" x2="125" y2="290" stroke="#10B981" stroke-width="2" />
+                                            <line x1="125" y1="320" x2="125" y2="330" stroke="#10B981" stroke-width="2" />
+
+                                            <rect x="220" y="240" width="10" height="20" fill="#10B981" />
+                                            <line x1="225" y1="230" x2="225" y2="240" stroke="#10B981" stroke-width="2" />
+                                            <line x1="225" y1="260" x2="225" y2="270" stroke="#10B981" stroke-width="2" />
+
+                                            <rect x="320" y="220" width="10" height="25" fill="#10B981" />
+                                            <line x1="325" y1="210" x2="325" y2="220" stroke="#10B981" stroke-width="2" />
+                                            <line x1="325" y1="245" x2="325" y2="255" stroke="#10B981" stroke-width="2" />
+
+                                            <rect x="520" y="190" width="10" height="40" fill="#10B981" />
+                                            <line x1="525" y1="180" x2="525" y2="190" stroke="#10B981" stroke-width="2" />
+                                            <line x1="525" y1="230" x2="525" y2="240" stroke="#10B981" stroke-width="2" />
+
+                                            <rect x="720" y="150" width="10" height="30" fill="#10B981" />
+                                            <line x1="725" y1="140" x2="725" y2="150" stroke="#10B981" stroke-width="2" />
+                                            <line x1="725" y1="180" x2="725" y2="190" stroke="#10B981" stroke-width="2" />
+
+                                            <!-- Bearish candles -->
+                                            <rect x="170" y="260" width="10" height="20" fill="#EF4444" />
+                                            <line x1="175" y1="250" x2="175" y2="260" stroke="#EF4444" stroke-width="2" />
+                                            <line x1="175" y1="280" x2="175" y2="290" stroke="#EF4444" stroke-width="2" />
+
+                                            <rect x="270" y="230" width="10" height="25" fill="#EF4444" />
+                                            <line x1="275" y1="220" x2="275" y2="230" stroke="#EF4444" stroke-width="2" />
+                                            <line x1="275" y1="255" x2="275" y2="265" stroke="#EF4444" stroke-width="2" />
+
+                                            <rect x="420" y="200" width="10" height="30" fill="#EF4444" />
+                                            <line x1="425" y1="190" x2="425" y2="200" stroke="#EF4444" stroke-width="2" />
+                                            <line x1="425" y1="230" x2="425" y2="240" stroke="#EF4444" stroke-width="2" />
+
+                                            <rect x="620" y="170" width="10" height="40" fill="#EF4444" />
+                                            <line x1="625" y1="160" x2="625" y2="170" stroke="#EF4444" stroke-width="2" />
+                                            <line x1="625" y1="210" x2="625" y2="220" stroke="#EF4444" stroke-width="2" />
+                                        </g>
+
+                                        <defs>
+                                            <linearGradient id="forexChartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.8" />
+                                                <stop offset="100%" stop-color="#3B82F6" stop-opacity="0" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 pointer-events-none border border-gray-700 rounded-lg"></div>
+                            </div>
+
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-gray-800 bg-opacity-70 p-4 rounded-lg">
+                                    <p class="text-xs font-medium text-gray-400 uppercase">Currency Pair</p>
+                                    <p class="text-lg font-semibold text-white">EUR/USD</p>
+                                </div>
+                                <div class="bg-gray-800 bg-opacity-70 p-4 rounded-lg">
+                                    <p class="text-xs font-medium text-gray-400 uppercase">Current Rate</p>
+                                    <p class="text-lg font-semibold text-green-400">1.2145</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started Section -->
+        <section class="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-400 uppercase bg-blue-900 bg-opacity-30 rounded-full">
+                        Start Trading
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                        <span class="block">How to Start Trading Forex</span>
+                    </h2>
+                    <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
+                        Begin your forex trading journey in just a few simple steps
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Step 1 -->
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <span class="text-2xl font-bold text-white">1</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Create an Account</h3>
+                            <p class="text-gray-300">Sign up for a trading account in minutes with a simple verification process.</p>
+                            <div class="mt-6">
+                                <a href="#" class="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:from-blue-500 hover:to-indigo-500 transition duration-300 ease-in-out transform hover:scale-105">
+                            Register Now
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <span class="text-2xl font-bold text-white">2</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Fund Your Account</h3>
+                            <p class="text-gray-300">Deposit funds using various payment methods including credit/debit cards, bank transfers, or e-wallets.</p>
+                            <div class="mt-6">
+                                <a href="#" class="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:from-blue-500 hover:to-indigo-500 transition duration-300 ease-in-out transform hover:scale-105">
+                            Deposit Options
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative bg-gray-800 bg-opacity-80 backdrop-blur-sm p-6 rounded-xl flex flex-col items-center text-center">
+                            <div class="w-12 h-12 bg-blue-600 bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <span class="text-2xl font-bold text-white">3</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">Start Trading</h3>
+                            <p class="text-gray-300">Begin trading on our user-friendly platform with access to a wide range of forex currency pairs.</p>
+                            <div class="mt-6">
+                                <a href="#" class="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg hover:from-blue-500 hover:to-indigo-500 transition duration-300 ease-in-out transform hover:scale-105">
+                            Start Now
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Try Our Demo Account</h3>
+                            <p class="text-gray-300 mb-6">
+                                Practice forex trading with our risk-free demo account loaded with virtual funds. Test strategies, explore platform features, and gain confidence before trading with real money.
+                            </p>
+                            <div>
+                                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                            Open Demo Account
+                            <svg class="ml-2 -mr-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                        <div class="relative h-64 md:h-auto">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 rounded-lg transform rotate-3"></div>
+                            <div class="absolute inset-0 bg-gray-800 bg-opacity-80 backdrop-blur-sm rounded-lg flex items-center justify-center p-6">
+                                <div class="text-center">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 bg-opacity-20 mb-4">
+                                        <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-2">Risk-Free Practice</h4>
+                                    <p class="text-gray-300">$50,000.00 in virtual funds to test your trading strategies</p>
+                                    <div class="mt-4 flex justify-center space-x-3">
+                                        <div class="flex items-center">
+                                            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                            <span class="ml-2 text-sm text-gray-300">Real-time data</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                            <span class="ml-2 text-sm text-gray-300">All features</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+        <!-- Trading Features Section -->
+        <section class="py-16 bg-gray-900 relative overflow-hidden">
+            <!-- Decorative Background Elements -->
+            <div class="absolute inset-0">
+                <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+                    <div class="absolute inset-0 opacity-10">
+                        <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="trading-grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <path d="M0 40V0h40" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                            <circle cx="20" cy="20" r="1" fill="currentColor"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#trading-grid)"/>
+                </svg>
+                    </div>
+                </div>
+                <!-- Glowing Accents -->
+                <div data-responsive-decoration class="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-3xl"></div>
+                <div data-responsive-decoration class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full filter blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Trade What You Want, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">When You Want</span>
+                    </h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto"></div>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column - Image -->
+                    <div class="relative" data-aos="fade-right" data-aos-duration="1200">
+                        <div class="relative">
+                            <!-- Decorative Elements -->
+                            <div class="absolute -inset-4">
+                                <div class="w-full h-full mx-auto opacity-30 blur-lg filter">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-3xl"></div>
+                                </div>
+                            </div>
+                            <img src="temp/custom/img/commission-scheme-crypt1t1.png" alt="commission-scheme" class="relative rounded-xl shadow-2xl w-full">
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Content -->
+                    <div class="space-y-8">
+                        <div class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-sm rounded-xl p-8 border border-gray-700">
+                            <p class="text-xl text-gray-200 leading-relaxed mb-8">
+                                One of the primary goals of is to provide the best product in the market. Our relationships with leading tier one financial institutions mean deep liquidity and tighter spreads for Forex traders.
+                            </p>
+
+                            <ul class="space-y-4">
+                                <li class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                    </div>
+                                    <span class="text-gray-300 text-lg">Trade Forex, Indices, Shares & Commodities</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                    </div>
+                                    <span class="text-gray-300 text-lg">Access global markets 24 hours / 7 days</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                    </div>
+                                    <span class="text-gray-300 text-lg">Multilingual customer support</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                    </div>
+                                    <span class="text-gray-300 text-lg">Trade on the go on our mobile apps</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-8">
+                                <a href="about" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                    title="Learn About ">
+                            Learn More About Our Services
+                            <svg class="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600">
+                    <div class="absolute inset-0 overflow-hidden opacity-20">
+                        <svg class="absolute bottom-0 left-0 transform translate-y-1/2 -translate-x-1/2 lg:bottom-0 lg:translate-y-0 lg:translate-x-0" width="800" height="800" fill="none" viewBox="0 0 400 400">
+                    <defs>
+                        <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6fe" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect x="0" y="0" width="4" height="4" fill="currentColor" />
+                        </pattern>
+                    </defs>
+                    <rect width="800" height="800" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6fe)" />
+                </svg>
+                        <svg class="absolute top-0 right-0 transform -translate-y-1/2 translate-x-1/2 lg:top-0 lg:translate-y-0 lg:translate-x-0" width="800" height="800" fill="none" viewBox="0 0 400 400">
+                    <defs>
+                        <pattern id="e9033f3e-f665-41a6-84ef-756f6778e6ff" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect x="0" y="0" width="4" height="4" fill="currentColor" />
+                        </pattern>
+                    </defs>
+                    <rect width="800" height="800" fill="url(#e9033f3e-f665-41a6-84ef-756f6778e6ff)" />
+                </svg>
+                    </div>
+                    <div class="relative px-6 py-12 sm:py-16 sm:px-12 lg:px-16">
+                        <div class="md:ml-auto md:w-1/2 md:pl-10">
+                            <div class="text-base max-w-prose mx-auto lg:max-w-none">
+                                <span class="text-sm font-semibold text-white uppercase tracking-wider">Ready to trade?</span>
+                                <h2 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">Start Your Forex Trading Journey</h2>
+                            </div>
+                            <div class="mt-6 prose prose-indigo prose-lg text-white">
+                                <p>Join thousands of traders worldwide who trust our platform for their forex trading needs. Get started with a free demo account or open a real trading account today.</p>
+                            </div>
+                            <div class="mt-8 flex space-x-4">
+                                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-600 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white focus:ring-offset-indigo-600">
+                            Create Account
+                        </a>
+                                <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-800 bg-opacity-60 hover:bg-opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Learn More
+                        </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/3">
+                        <svg width="404" height="344" fill="none" viewBox="0 0 404 344">
+                    <defs>
+                        <pattern id="85737c0e-0916-41d7-917f-596dc7edfa27" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect x="0" y="0" width="4" height="4" class="text-white" fill="currentColor" />
+                        </pattern>
+                    </defs>
+                    <rect width="404" height="344" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)" />
+                </svg>
+                    </div>
+                    <div class="hidden md:block absolute bottom-0 right-0 transform translate-y-1/3 translate-x-1/3">
+                        <svg width="404" height="344" fill="none" viewBox="0 0 404 344">
+                    <defs>
+                        <pattern id="85737c0e-0916-41d7-917f-596dc7edfa28" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect x="0" y="0" width="4" height="4" class="text-white" fill="currentColor" />
+                        </pattern>
+                    </defs>
+                    <rect width="404" height="344" fill="url(#85737c0e-0916-41d7-917f-596dc7edfa28)" />
+                </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark-400 text-gray-300">
+        <!-- Upper Footer -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Company Info -->
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <a href="/" class="flex items-center justify-start leading-none">
+                                <img class="h-6 sm:h-8 w-auto object-contain shrink-0" src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" alt="XYTRION MARKETS">
+                            </a>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-6">
+                                XYTRION MARKETS offers CFD trading on stocks, forex, indices, commodities, and cryptocurrencies with competitive spreads and advanced trading tools.
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Twitter</span>
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                                <a href="#" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">LinkedIn</span>
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                                <a href="mailto:support@xytrionmarkets.com" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Email</span>
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            </div>
+                        </div>
+
+                        <!-- Quick Links -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="about" class="text-sm text-gray-400 hover:text-white transition">About Us</a></li>
+                                <li><a href="why-us" class="text-sm text-gray-400 hover:text-white transition">Why Choose Us</a></li>
+                                <li><a href="for-traders" class="text-sm text-gray-400 hover:text-white transition">Education</a></li>
+                                <li><a href="contacts" class="text-sm text-gray-400 hover:text-white transition">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Trading -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Trading</h3>
+                            <ul class="space-y-3">
+                                <li><a href="cryptocurrencies" class="text-sm text-gray-400 hover:text-white transition">Cryptocurrencies</a></li>
+                                <li><a href="forex" class="text-sm text-gray-400 hover:text-white transition">Forex</a></li>
+                                <li><a href="shares" class="text-sm text-gray-400 hover:text-white transition">Shares</a></li>
+                                <li><a href="indices" class="text-sm text-gray-400 hover:text-white transition">Indices</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Account -->
+                        <div>
+                            <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Your Account</h3>
+                            <ul class="space-y-3">
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Log In</a></li>
+                                <li><a href="register" class="text-sm text-gray-400 hover:text-white transition">Create Account</a></li>
+                                <li><a href="login" class="text-sm text-gray-400 hover:text-white transition">Demo Account</a></li>
+                                <li><a href="contact" class="text-sm text-gray-400 hover:text-white transition">Help Center</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Availability -->
+        <div class="border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="text-sm font-semibold text-white">Available On</h4>
+                        </div>
+                        <div class="flex items-center space-x-6">
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Web Platform">
+                            <i class="fas fa-desktop mr-2"></i>
+                            <span class="text-sm">Web</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Windows App">
+                            <i class="fab fa-windows mr-2"></i>
+                            <span class="text-sm">Windows</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="Android App">
+                            <i class="fab fa-android mr-2"></i>
+                            <span class="text-sm">Android</span>
+                        </a>
+                            <a href="#" class="flex items-center text-gray-400 hover:text-white" aria-label="iOS App">
+                            <i class="fab fa-apple mr-2"></i>
+                            <span class="text-sm">iOS</span>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer & Legal -->
+        <div class="bg-dark-500 border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="py-6">
+                    <div class="text-xs text-gray-400">
+                        <p class="mb-4 leading-relaxed">
+                            <span class="font-semibold text-gray-300">RISK WARNING:</span> The Financial Products offered by the company include Contracts for Difference ('CFDs') and other complex financial products. Trading CFDs carries a high level
+                            of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all investors because it is possible to lose all of your invested capital. You should never invest money that
+                            you cannot afford to lose. Before trading in the complex financial products offered, please ensure you understand the risks involved.
+                        </p>
+                        <div class="flex flex-wrap gap-4 mb-4">
+                            <a href="terms" class="text-blue-400 hover:text-blue-300 transition">Terms & Conditions</a>
+                            <a href="privacy" class="text-blue-400 hover:text-blue-300 transition">Privacy Policy</a>
+                            <a href="regulation" class="text-blue-400 hover:text-blue-300 transition">Legal Documents</a>
+                        </div>
+                        <p>©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> XYTRION MARKETS. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gtranslate_wrapper hidden lg:block"></div>
+
+        <script>
+            window.gtranslateSettings = {
+
+                default_language: "en",
+
+                alt_flags: {
+                    "en": "usa"
+                },
+
+                wrapper_selector: ".gtranslate_wrapper",
+
+                flag_style: "3d",
+
+            };
+        </script>
+
+        <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+    </footer>
+
+    <!-- Sticky Market Ticker Widget -->
+    <div data-responsive-bottom-bar data-responsive-ticker class="fixed bottom-0 left-0 right-0 z-30 bg-dark-400 border-t border-gray-800">
+        <div data-responsive-embed class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+    </div>
+
+    <!-- Live Chat Button -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .last-widget {
+            position: sticky;
+            z-index: 10;
+            bottom: 0;
+            display: none;
+        }
+    </style>
+
+
+    <div class="last-widget">
+        <!-- TradingView Widget BEGIN -->
+        <div data-responsive-embed class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [{
+                            "proName": "FX_IDC:EURUSD",
+                            "title": "EUR/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:BTCUSD",
+                            "title": "BTC/USD"
+                        },
+                        {
+                            "proName": "BITSTAMP:ETHUSD",
+                            "title": "ETH/USD"
+                        }
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+            </script>
+        </div>
+
+
+        <!-- GetButton.io widget -->
+        <!--<script type="text/javascript">-->
+        <!--    (function () {-->
+        <!--        var options = {-->
+        <!--whatsapp: "1234567890", // WhatsApp number-->
+        <!--call_to_action: "Message us", // Call to action-->
+        <!--button_color: "#FF6550", // Color of button-->
+        <!--position: "right", // Position may be 'right' or 'left'-->
+        <!--        };-->
+        <!--        var proto = 'https:', host = "getbutton.io", url = proto + '//static.' + host;-->
+        <!--        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';-->
+        <!--        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };-->
+        <!--        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);-->
+        <!--    })();-->
+        <!--</script>-->
+        <!-- Additional Scripts -->
+        <script>
+            // Live Chat Function
+            function openLiveChat(e) {
+                e.preventDefault();
+                console.log('Opening live chat...');
+                // Implement your live chat functionality here
+            }
+
+            // Theme toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize any custom components
+                console.log('DOM loaded, initializing components...');
+            });
+
+            // Analytics (preserved from original)
+            function bindGAEvents(eventCategory, callback, iter) {
+                if (typeof iter === "undefined") {
+                    iter = 1;
+                }
+                if (window.dataLayer) {
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                } else if (iter > 2 && typeof callback === "function") {
+                    callback();
+                } else {
+                    setTimeout(function() {
+                        bindGAEvents(eventCategory, callback, iter + 1);
+                    }, 500);
+                }
+            }
+
+            $(document).ready(function() {
+                if ('' == '1') {
+                    bindGAEvents('ex_new_user');
+                }
+
+                $(document).on('click', '.start-trading, .open-live-account, .open-demo-account', function(event) {
+                    var redirectLink = $(this).attr('href');
+                    bindGAEvents('ex_button', function() {
+                        window.location.href = redirectLink;
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
+
+<script src="/assets/js/app.js"></script>
+        <!-- Shared Live Chat Widget -->
+    <script src="/dashboard/chat-widget.js" defer></script>
+</body>
+
+</html>

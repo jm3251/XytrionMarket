@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+
+<html lang="en" x-data="{ darkMode: localStorage.getItem('theme') === 'light' ? false : true }" :class="{ 'dark': darkMode }" class="dark bg-gray-900">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Bot Trading</title>
+
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/storage/app/public/photos/LwmPzjLpWvqARLQerBqGjF6TGPAaVzudiJtGU1Is.png" rel="icon" type="image/x-icon" />
+
+    <!-- Inter Font -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+    <!-- Tailwind CSS CDN -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <!-- Enable dark mode class strategy -->
+
+    <script>
+        tailwind.config = {
+
+            darkMode: 'class',
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+
+                        sans: ['Inter', 'sans-serif'],
+
+                    },
+
+                    colors: {
+
+                        primary: {
+
+                            50: '#eef2ff',
+
+                            100: '#e0e7ff',
+
+                            200: '#c7d2fe',
+
+                            300: '#a5b4fc',
+
+                            400: '#818cf8',
+
+                            500: '#6366f1',
+
+                            600: '#4f46e5',
+
+                            700: '#4338ca',
+
+                            800: '#3730a3',
+
+                            900: '#312e81',
+
+                        },
+
+                        'glass': 'rgba(255, 255, 255, 0.05)',
+
+                    },
+
+                    backdropBlur: {
+
+                        'xs': '2px',
+
+                    },
+
+                    animation: {
+
+                        'gradient-x': 'gradient-x 15s ease infinite',
+
+                        'gradient-y': 'gradient-y 15s ease infinite',
+
+                        'gradient-xy': 'gradient-xy 15s ease infinite',
+
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+
+                        'float': 'float 6s ease-in-out infinite',
+
+                    },
+
+                    keyframes: {
+
+                        'gradient-y': {
+
+                            '0%, 100%': {
+
+                                'background-size': '400% 400%',
+
+                                'background-position': 'center top'
+
+                            },
+
+                            '50%': {
+
+                                'background-size': '200% 200%',
+
+                                'background-position': 'center center'
+
+                            }
+
+                        },
+
+                        'gradient-x': {
+
+                            '0%, 100%': {
+
+                                'background-size': '200% 200%',
+
+                                'background-position': 'left center'
+
+                            },
+
+                            '50%': {
+
+                                'background-size': '200% 200%',
+
+                                'background-position': 'right center'
+
+                            }
+
+                        },
+
+                        'gradient-xy': {
+
+                            '0%, 100%': {
+
+                                'background-size': '400% 400%',
+
+                                'background-position': 'left center'
+
+                            },
+
+                            '50%': {
+
+                                'background-size': '200% 200%',
+
+                                'background-position': 'right center'
+
+                            }
+
+                        },
+
+                        'float': {
+
+                            '0%, 100%': {
+                                transform: 'translateY(0)'
+                            },
+
+                            '50%': {
+                                transform: 'translateY(-10px)'
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <script>
+        // Set dark mode as default if no preference is stored
+
+        if (!localStorage.getItem('theme')) {
+
+            localStorage.setItem('theme', 'dark');
+
+            document.documentElement.classList.add('dark');
+
+        }
+
+
+
+        document.addEventListener('alpine:init', () => {
+
+            Alpine.store('theme', {
+
+                init() {
+
+                    // Default to dark if no preference is set
+
+                    this.darkMode = localStorage.getItem('theme') === 'dark' || !localStorage.getItem('theme');
+
+                    this.updateTheme();
+
+                },
+
+                darkMode: true, // Set default to true
+
+                toggle() {
+
+                    this.darkMode = !this.darkMode;
+
+                    this.updateTheme();
+
+                },
+
+                updateTheme() {
+
+                    localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+
+                    document.documentElement.classList.toggle('dark', this.darkMode);
+
+                }
+
+            });
+
+        });
+    </script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CDN -->
+
+
+
+
+
+    <link rel="stylesheet" href="/dashboard/chat-widget.css">
+<link rel="stylesheet" href="/assets/css/responsive.css?v=20261021-balance-withdraw">
+<script defer src="/assets/js/responsive.js"></script>
+</head>
+
+<body x-data="{ darkMode: localStorage.theme === 'dark' || !localStorage.theme, sidebarOpen: false }" :class="{ 'dark': darkMode }" class="dark text-gray-100 bg-gray-900" x-cloak>
+
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Professional Trading Navbar -->
+
+    <nav data-responsive-navbar x-data="{
+
+  open: false,
+
+  darkMode: localStorage.theme === 'dark' || !localStorage.theme,
+
+  notificationOpen: false,
+
+  quickActionsOpen: false
+
+}" class="bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl border-b border-gray-200/80 dark:border-gray-700/80 sticky top-0 z-50 shadow-sm dark:shadow-gray-900/20" x-cloak>
+
+
+
+        <!-- Main Navigation Container -->
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+            <div class="flex justify-between items-center h-20">
+
+
+
+                <!-- Left Section: Logo & Quick Market Info -->
+
+                <div class="flex items-center space-x-4">
+
+                    <!-- Logo -->
+
+                    <a href="bot-trading.html" class="flex items-center space-x-3 group min-w-0">
+
+          <img src="/storage/app/public/photos/3jFcLr6boloTIuKPvPlv1L7iJnDk4OBtEXPmEHXC.png" class="h-6 sm:h-8 w-auto object-contain shrink-0" alt="XYTRION MARKETS" />
+
+          <div class="hidden">
+
+            <span class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+
+              XYTRION MARKETS
+
+            </span>
+
+            <div class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+
+              Professional Trading
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+                    <!-- Live Market Ticker (Hidden on small screens) -->
+
+                    <div class="hidden lg:flex items-center space-x-4 ml-8 pl-8 border-l border-gray-200 dark:border-gray-700" x-data="cryptoPrices()" x-init="fetchPrices()">
+
+                        <div class="flex items-center space-x-2">
+
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+
+                            <span class="text-xs font-medium text-gray-600 dark:text-gray-300">LIVE</span>
+
+                        </div>
+
+                        <div class="text-sm">
+
+                            <span class="text-gray-500 dark:text-gray-400">BTC:</span>
+
+                            <span class="font-mono ml-1" :class="btcChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" x-text="formatMarket(btcPrice)"></span>
+
+                        </div>
+
+                        <div class="text-sm">
+
+                            <span class="text-gray-500 dark:text-gray-400">ETH:</span>
+
+                            <span class="font-mono ml-1" :class="ethChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" x-text="formatMarket(ethPrice)"></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Center Section: Account Balance (Desktop) -->
+
+                <div class="hidden lg:flex items-center space-x-6">
+
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 px-4 py-2 rounded-lg border border-blue-100 dark:border-blue-800">
+
+                        <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Account Balance</div>
+
+                        <div class="text-lg font-bold text-gray-900 dark:text-white user-balance-text" data-user-balance aria-live="polite">—</div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Right Section: Actions & User -->
+
+                <div class="flex items-center space-x-2">
+
+
+
+                    <!-- Quick Actions Dropdown (Desktop) -->
+
+                    <div class="hidden lg:block relative" x-data="{ quickActionsOpen: false }">
+
+                        <button @click="quickActionsOpen = !quickActionsOpen" class="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200">
+
+            <i data-lucide="zap" class="w-4 h-4"></i>
+
+            <span>Quick Trade</span>
+
+            <i data-lucide="chevron-down" class="w-4 h-4" :class="quickActionsOpen ? 'rotate-180' : ''"></i>
+
+          </button>
+
+
+
+                        <div x-show="quickActionsOpen" @click.away="quickActionsOpen = false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20"
+                            x-cloak>
+
+                            <div class="p-2">
+
+                                <a href="/dashboard/deposits.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="plus-circle" class="w-4 h-4 mr-3 text-green-500"></i>
+
+                Deposit Funds
+
+              </a>
+
+                                <a href="withdrawals.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="minus-circle" class="w-4 h-4 mr-3 text-red-500"></i>
+
+                Withdraw
+
+              </a>
+
+                                <a href="trade.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="trending-up" class="w-4 h-4 mr-3 text-blue-500"></i>
+
+                Trade Markets
+
+              </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Notifications -->
+
+                    <div class="relative" data-notifications-root>
+                        <button type="button" data-notifications-toggle aria-label="Notifications" aria-expanded="false" aria-controls="notification-panel" class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200">
+                            <i data-lucide="bell" class="w-5 h-5"></i>
+                            <span data-notification-count hidden style="display:none" class="absolute -top-1 -right-1 items-center justify-center min-w-[18px] h-[18px] text-xs font-medium text-white bg-red-500 rounded-full px-1 border-2 border-white dark:border-gray-900"></span>
+                        </button>
+                        <div id="notification-panel" data-notification-panel hidden class="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-[100]">
+                            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between gap-2">
+                                <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Notifications <span data-notifications-unread class="text-xs font-normal text-gray-500 dark:text-gray-400">Loading…</span></h3>
+                                <button type="button" data-notifications-read-all class="text-xs font-medium text-blue-600 dark:text-blue-400 disabled:opacity-50">Mark all read</button>
+                            </div>
+                            <div data-notification-list id="notification-list" class="max-h-[60vh] overflow-y-auto" aria-live="polite"></div>
+                            <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 text-center text-xs text-gray-500 dark:text-gray-400">Showing up to 50 recent notifications</div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Dark Mode Toggle -->
+
+                    <button x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }" data-theme-toggle aria-label="Switch theme" class="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
+                        :aria-pressed="darkMode">
+
+          <i data-lucide="sun" x-show="!darkMode" class="w-5 h-5"></i>
+
+          <i data-lucide="moon" x-show="darkMode" class="w-5 h-5"></i>
+
+        </button>
+
+
+
+                    <!-- Language Translator (Desktop) -->
+
+
+
+
+
+                    <!-- User Profile Dropdown -->
+
+                    <div class="relative" x-data="{ dropdownOpen: false }">
+
+                        <button data-responsive-profile-toggle aria-label="Account menu" @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-3 px-2 py-2 text-sm rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 focus:outline-none">
+
+            <div class="flex items-center space-x-2">
+
+              <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white text-sm font-medium">
+                <span class="user-initial-text">?</span>
+              </div>
+
+              <div class="hidden sm:block text-left">
+
+                <div class="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[120px]">
+                  <span class="user-name-text">Loading...</span>
+                </div>
+
+                <div class="text-xs text-gray-500 dark:text-gray-400">
+
+                  Trading Account
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400" :class="dropdownOpen ? 'rotate-180' : ''"></i>
+
+          </button>
+
+
+
+                        <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" data-responsive-profile-panel class="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-20"
+                            x-cloak>
+
+
+
+                            <!-- User Info Header -->
+
+                            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+
+                                <div class="flex items-center space-x-3">
+
+                                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white text-lg font-medium">
+                                        <span class="user-initial-text">?</span>
+                                    </div>
+
+                                    <div>
+
+                                        <div class="text-sm font-medium text-gray-900 dark:text-white">
+                  <span class="user-name-text">Loading...</span>
+                </div>
+
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">
+
+                                            <span data-user-balance aria-live="polite">—</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Menu Items -->
+
+                            <div class="p-2">
+
+                                <a href="/dashboard/account-settings.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="user" class="w-4 h-4 mr-3"></i>
+
+                Profile Settings
+
+              </a>
+
+                                <a href="accounthistory.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="receipt" class="w-4 h-4 mr-3"></i>
+
+                Account History
+
+              </a>
+
+                                <a href="/dashboard/support.html" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md">
+
+                <i data-lucide="help-circle" class="w-4 h-4 mr-3"></i>
+
+                Support Center
+
+              </a>
+
+                                <div class="border-t border-gray-200 dark:border-gray-600 my-2"></div>
+
+                                <form method="POST" action="#" onsubmit="return false;">
+                                    <button type="submit" class="w-full flex items-center px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md">
+
+                  <i data-lucide="log-out" class="w-4 h-4 mr-3"></i>
+
+                  Sign Out
+
+                </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Mobile Menu Button -->
+
+                    <button type="button" data-sidebar-toggle aria-controls="xyt-sidebar" aria-expanded="false" aria-label="Open navigation menu" class="lg:hidden p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200">
+
+          <i data-lucide="menu" x-show="!sidebarOpen" class="w-5 h-5"></i>
+
+          <i data-lucide="x" x-show="sidebarOpen" class="w-5 h-5"></i>
+
+        </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Mobile Market Ticker -->
+
+        <div data-responsive-mobile-ticker class="lg:hidden bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700 px-4 py-2" x-data="cryptoPrices()" x-init="fetchPrices()">
+
+            <div class="flex items-center justify-between text-xs">
+
+                <div class="flex items-center space-x-4">
+
+                    <div class="flex items-center space-x-1">
+
+                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+
+                        <span class="text-gray-600 dark:text-gray-400">LIVE</span>
+
+                    </div>
+
+                    <div>
+
+                        <span class="text-gray-500 dark:text-gray-400">BTC:</span>
+
+                        <span class="font-mono ml-1" :class="btcChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" x-text="formatMarket(btcPrice)"></span>
+
+                    </div>
+
+                    <div>
+
+                        <span class="text-gray-500 dark:text-gray-400">ETH:</span>
+
+                        <span class="font-mono ml-1" :class="ethChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'" x-text="formatMarket(ethPrice)"></span>
+
+                    </div>
+
+                </div>
+
+                <div class="lg:hidden">
+
+                    <div class="text-gray-500 dark:text-gray-400">Balance:</div>
+
+                    <div data-user-balance class="font-semibold text-gray-900 dark:text-white" aria-live="polite">—</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+    <!-- Sidebar Toggle Wrapper -->
+
+    <div class="flex min-h-screen bg-gray-900" x-cloak>
+
+
+
+        <!-- Sidebar -->
+
+        <aside data-responsive-sidebar id="xyt-sidebar" aria-label="Main navigation" x-cloak :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed z-50 lg:z-40 top-0 left-0 w-72 h-full bg-white dark:bg-gray-900 shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto">
+<div data-responsive-sidebar-heading><span class="font-semibold">Navigation</span><button type="button" data-sidebar-close aria-label="Close navigation menu" class="rounded-lg text-xl">×</button></div>
+
+
+
+            <!-- User Profile Section -->
+
+            <div class="relative p-4 border-b border-gray-200 dark:border-gray-700">
+
+                <div class="flex items-center gap-4">
+
+                    <div class="relative">
+
+
+
+                        <div class="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-medium mx-auto mb-3">
+
+                            A
+
+                        </div>
+
+                        <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white dark:border-gray-900"></div>
+
+                    </div>
+
+                    <div class="flex-1 min-w-0">
+
+                        <h2 class="text-sm font-semibold text-gray-900 dark:text-white truncate">
+
+                            <span data-user-name>Loading...</span>
+
+                        </h2>
+
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Account Balance: <span data-user-balance aria-live="polite">—</span></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Live Market Prices -->
+
+            <div class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20" x-cloak>
+
+                <div class="flex items-center justify-between mb-3">
+
+                    <h3 class="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase">Live Market</h3>
+
+                    <span class="flex items-center text-xs text-green-600 dark:text-green-400">
+
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
+
+                <span class="font-medium">LIVE</span>
+
+                    </span>
+
+                </div>
+
+                <div class="space-y-2">
+
+                    <coingecko-coin-price-marquee-widget coin-ids="bitcoin,ethereum,eos,ripple,litecoin" currency="usd" background-color="transparent" locale="en" font-color="#333">
+
+                    </coingecko-coin-price-marquee-widget>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Navigation Menu -->
+
+            <nav class="p-4 space-y-6 text-sm pb-20" x-cloak>
+
+                <!-- Overview Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+
+                        <span>Overview</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
+
+                        Dashboard
+
+                    </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="/dashboard/accounthistory.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="receipt" class="w-5 h-5 mr-3"></i>
+
+                        Account Statement
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Portfolio & Investments Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="briefcase" class="w-4 h-4"></i>
+
+                        <span>Portfolio & Investments</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+
+
+                        <li>
+
+                            <a href="/dashboard/tradinghistory.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="activity" class="w-5 h-5 mr-3"></i>
+
+                        Performance History
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Trading & Markets Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+
+                        <span>Trading & Markets</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard/trade.html" class="group relative flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="candlestick-chart" class="w-5 h-5 mr-3"></i>
+
+                        Live Markets
+
+                        <span class="ml-auto flex items-center px-2 py-0.5 text-xs font-medium text-white bg-gradient-to-r from-green-500 to-green-600 rounded-full">
+
+                            <div class="w-1.5 h-1.5 bg-white rounded-full animate-pulse mr-1.5"></div>
+
+                            Live
+
+                        </span>
+
+                        <div class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-xs text-white rounded whitespace-nowrap">
+
+                            Real-time market trading
+
+                        </div>
+
+                    </a>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <a href="/dashboard/bot-trading.html" class="group relative flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 font-medium">
+
+                        <i data-lucide="bot" class="w-5 h-5 mr-3"></i>
+
+                        AI Trading Bots
+
+                        <span class="ml-auto px-2 py-0.5 text-xs font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-full">AI</span>
+
+                        <div class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-xs text-white rounded whitespace-nowrap">
+
+                            Automated trading algorithms
+
+                        </div>
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Trading Signals Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="radio" class="w-4 h-4"></i>
+
+                        <span>Market Intelligence</span>
+
+                    </div>
+
+
+
+                    <ul class="space-y-1">
+
+                        <!---->
+
+                        <li>
+
+                            <a href="/dashboard/signal.html" class="group relative flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+                        <i data-lucide="zap" class="w-5 h-5 mr-3"></i>
+
+                        Premium Signals
+
+                        <span class="ml-auto px-2 py-0.5 text-xs font-medium text-white bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full">Premium</span>
+
+                        <div class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-xs text-white rounded whitespace-nowrap">
+
+                            Expert trading insights
+
+                        </div>
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Wallet & Funds Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="wallet" class="w-4 h-4"></i>
+
+                        <span>Wallet & Funds</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard/deposits.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="plus-circle" class="w-5 h-5 mr-3"></i>
+
+                        Deposit Funds
+
+                    </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="/dashboard/withdrawals.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="minus-circle" class="w-5 h-5 mr-3"></i>
+
+                        Withdraw Funds
+
+                    </a>
+
+                        </li>
+
+
+
+
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Credit & Financing Section -->
+
+
+
+                <!-- Account Management Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="user-circle" class="w-4 h-4"></i>
+
+                        <span>Account Management</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard/account-settings.html" class="flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="user" class="w-5 h-5 mr-3"></i>
+
+                        Profile Settings
+
+                    </a>
+
+                        </li>
+
+
+                        <li x-data="{ kycOpen: false }" x-cloak>
+
+
+                            <!-- KYC Dropdown -->
+
+                            <div class="relative">
+
+                                <button @click="kycOpen = !kycOpen" class="flex items-center w-full px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 ">
+
+                                <i data-lucide="shield-alert" class="w-5 h-5 mr-3"></i>
+
+                                <span class="flex-1 text-left">Identity Verification</span>
+
+                                <i data-lucide="chevron-down"
+
+                                   :class="kycOpen ? 'rotate-180' : 'rotate-0'"
+
+                                   class="w-4 h-4 transition-transform duration-200"></i>
+
+                            </button>
+
+
+
+                                <!-- Dropdown Content -->
+
+                                                                <div x-show="kycOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 -translate-y-2" class="mt-2 ml-8 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm" x-cloak>
+
+                                    <h4 class="text-sm font-medium text-gray-900 dark:text-white mb-3">Identity Verification</h4>
+
+                                    <!-- Unverified -->
+                                    <div id="kyc-sidebar-unverified" style="display:none">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Complete your identity verification to unlock full trading features</p>
+                                        <a href="/kyc-form.html" class="inline-flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                                            <span>Verify Now</span>
+                                        </a>
+                                    </div>
+
+                                    <!-- Under Review -->
+                                    <div id="kyc-sidebar-review" style="display:none">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Your verification is under review</p>
+                                        <div class="flex items-center text-xs text-yellow-600 dark:text-yellow-400">
+                                            <i data-lucide="clock" class="w-3 h-3 mr-1"></i>
+                                            <span>Processing</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Verified -->
+                                    <div id="kyc-sidebar-verified" style="display:none">
+                                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Your identity has been verified</p>
+                                        <div class="flex items-center text-xs text-green-600 dark:text-green-400">
+                                            <i data-lucide="shield-check" class="w-3 h-3 mr-1"></i>
+                                            <span>Verified</span>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                    (function(){
+                                        var s = localStorage.getItem('kyc_status') || 'unverified';
+                                        try { var u = JSON.parse(localStorage.getItem('xytrion_current_user')); if(u && u.kyc_status) s = u.kyc_status; } catch(e){}
+                                        document.getElementById('kyc-sidebar-unverified').style.display = (s === 'unverified') ? '' : 'none';
+                                        document.getElementById('kyc-sidebar-review').style.display   = (s === 'under_review') ? '' : 'none';
+                                        document.getElementById('kyc-sidebar-verified').style.display = (s === 'verified') ? '' : 'none';
+                                    })();
+                                    </script>
+
+                                </div>
+
+                            </div>
+
+
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Growth & Referrals Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+
+                        <span>Growth & Rewards</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard/referuser.html" class="group relative flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="users" class="w-5 h-5 mr-3"></i>
+
+                        Referral Program
+
+                        <span class="ml-auto px-2 py-0.5 text-xs font-medium text-white bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full">10%</span>
+
+                        <div class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-xs text-white rounded whitespace-nowrap">
+
+                            Earn 10% commission on referrals
+
+                        </div>
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Support & Help Section -->
+
+                <div class="space-y-2">
+
+                    <div class="flex items-center gap-2 px-2 mt-6 text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">
+
+                        <i data-lucide="help-circle" class="w-4 h-4"></i>
+
+                        <span>Support & Help</span>
+
+                    </div>
+
+                    <ul class="space-y-1">
+
+                        <li>
+
+                            <a href="/dashboard/support.html" class="group relative flex items-center px-3 py-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-colors duration-150 ">
+
+                        <i data-lucide="headphones" class="w-5 h-5 mr-3"></i>
+
+                        Support Center
+
+                        <div class="hidden group-hover:block absolute left-full ml-2 px-2 py-1 bg-gray-900 text-xs text-white rounded whitespace-nowrap">
+
+                            Get help from our support team
+
+                        </div>
+
+                    </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- Account Actions -->
+
+                <div class="mt-6 p-4 border-t border-gray-200 dark:border-gray-700">
+
+                    <!-- Language Translator (Mobile/Sidebar) -->
+
+
+
+                    <form method="POST" action="#" onsubmit="return false;">
+                        <button type="submit" class="flex items-center w-full px-3 py-2 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/50 transition-colors duration-150">
+
+                        <i data-lucide="log-out" class="w-5 h-5 mr-3"></i>
+
+                        <span>Sign Out</span>
+
+                    </button>
+
+                    </form>
+
+                </div>
+
+            </nav>
+
+        </aside>
+
+
+
+        <!-- Sidebar overlay for mobile -->
+
+        
+
+
+
+        <!-- Main content placeholder -->
+
+        <div data-responsive-main class="flex-1 ml-0 lg:ml-72 p-4 pb-20 md:pb-4">
+            <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+
+                <!-- Hero Section -->
+                <div class="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-800">
+                    <!-- Animated Background Blobs -->
+                    <div class="absolute inset-0 pointer-events-none">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzYjgyZjYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIvPjxjaXJjbGUgY3g9IjIiIGN5PSI1OCIgcj0iMiIvPjxjaXJjbGUgY3g9IjU4IiBjeT0iNTgiIHI9IjIiLz48Y2lyY2xlIGN4PSI1OCIgY3k9IjIiIHI9IjIiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
+                        <div data-responsive-decoration class="absolute top-10 left-10 w-64 h-64 bg-blue-400/20 rounded-full filter blur-3xl animate-pulse"></div>
+                        <div data-responsive-decoration class="absolute bottom-10 right-10 w-64 h-64 bg-indigo-400/20 rounded-full filter blur-3xl animate-pulse" style="animation-delay:2s;"></div>
+                    </div>
+                    <!-- Hero Content -->
+                    <div class="relative z-10 container mx-auto px-6 py-14">
+                        <div class="text-center max-w-3xl mx-auto">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-5">
+                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span class="text-blue-100 text-sm font-medium">AI-Powered Trading — Active 24/7</span>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                                Automated Bot
+                                <span class="bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent"> Trading Hub</span>
+                            </h1>
+                            <p class="text-blue-100/80 text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+                                Deploy AI-powered trading bots that work around the clock to maximise your returns across Forex, Stocks, Crypto, and more.
+                            </p>
+                            <!-- Quick Stats Row -->
+                            <div class="flex flex-wrap items-center justify-center gap-6 mb-8">
+                                <div class="flex items-center gap-2 text-white/90">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-green-300"></i>
+                                    <span class="text-sm font-medium">Risk-Managed Strategies</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-white/90">
+                                    <i data-lucide="zap" class="w-5 h-5 text-yellow-300"></i>
+                                    <span class="text-sm font-medium">Instant Execution</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-white/90">
+                                    <i data-lucide="bar-chart-2" class="w-5 h-5 text-blue-200"></i>
+                                    <span class="text-sm font-medium">Real-Time Analytics</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-center gap-3">
+                                <a href="/dashboard.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white hover:bg-white/20 transition-all duration-200 text-sm font-medium">
+                                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                    Back to Dashboard
+                                </a>
+                                <a href="deposits.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-700 rounded-xl hover:bg-blue-50 transition-all duration-200 text-sm font-semibold shadow-lg">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                                    Fund Account
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Wave Divider -->
+                    <div class="absolute bottom-0 left-0 right-0">
+                        <svg viewBox="0 0 1440 80" class="w-full h-[80px]" preserveAspectRatio="none">
+                            <path fill="rgb(249 250 251)" class="dark:fill-gray-900-wave" d="M0,40L60,45C120,50,240,60,360,58C480,56,600,42,720,38C840,34,960,42,1080,48C1200,54,1320,58,1380,60L1440,62L1440,80L1380,80C1320,80,1200,80,1080,80C960,80,840,80,720,80C600,80,480,80,360,80C240,80,120,80,60,80L0,80Z"></path>
+                        </svg>
+                        <style>.dark .dark\:fill-gray-900-wave { fill: rgb(17 24 39); }</style>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="bg-gray-50 dark:bg-gray-900">
+                    <div class="container mx-auto px-4 md:px-6 py-10">
+
+                        <!-- Portfolio Overview Stats -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-10">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-md border border-gray-100 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Available Balance</span>
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="wallet" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="text-2xl font-bold text-gray-900 dark:text-white user-balance-text" data-user-balance aria-live="polite">—</div>
+                                <p class="text-xs text-gray-400 mt-1">Funds ready to invest</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-md border border-gray-100 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Investment</span>
+                                    <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="briefcase" class="w-5 h-5 text-indigo-600 dark:text-indigo-400"></i>
+                                    </div>
+                                </div>
+                                <div class="text-2xl font-bold text-gray-900 dark:text-white" data-invest-active-balance>$0.00</div>
+                                <p class="text-xs text-gray-400 mt-1" data-invest-active-note>No active investments</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-md border border-gray-100 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Profit Earned</span>
+                                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900/40 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="trending-up" class="w-5 h-5 text-green-600 dark:text-green-400"></i>
+                                    </div>
+                                </div>
+                                <div class="text-2xl font-bold text-green-600 dark:text-green-400" data-invest-total-profit>$0.00</div>
+                                <p class="text-xs text-gray-400 mt-1">Accrued across all bots</p>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-md border border-gray-100 dark:border-gray-700">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Bots</span>
+                                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/40 rounded-xl flex items-center justify-center">
+                                        <i data-lucide="bot" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
+                                    </div>
+                                </div>
+                                <div class="text-2xl font-bold text-gray-900 dark:text-white" data-invest-active-count>0</div>
+                                <p class="text-xs text-gray-400 mt-1">Bots working for you</p>
+                            </div>
+                        </div>
+
+                        <!-- My Active Investments -->
+                        <div class="mb-12">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">My Active Investments</h2>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Live progress of your running bot investments</p>
+                                </div>
+                            </div>
+                            <div id="active-investments-empty" class="bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-600 p-10 text-center">
+                                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700 mb-4">
+                                    <i data-lucide="bot" class="w-7 h-7 text-gray-400"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">No active investments yet</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Choose a trading bot below to start earning simulated daily profits.</p>
+                            </div>
+                            <div id="active-investments-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+                        </div>
+
+                        <!-- Section Header + Filters -->
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Available Trading Bots</h2>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Select a bot and start earning with automated strategies</p>
+                            </div>
+                            <!-- Filter Buttons -->
+                            <div class="flex flex-wrap gap-2">
+                                <button class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="all">All Bots</button>
+                                <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="forex">Forex</button>
+                                <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="crypto">Crypto</button>
+                                <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="stocks">Stocks</button>
+                                <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="indices">Indices</button>
+                                <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium transition-colors" data-filter="commodities">Commodities</button>
+                            </div>
+                        </div>
+
+                        <!-- Bot Cards Grid (rendered dynamically by bot-trading-ui.js) -->
+                        <div id="bot-plans-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+
+                        <!-- Investment History -->
+                        <div class="mt-12">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Investment History</h2>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">All your bot investments, past and present</p>
+                                </div>
+                            </div>
+                            <div id="investment-history-empty" class="bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-600 p-10 text-center">
+                                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gray-100 dark:bg-gray-700 mb-4">
+                                    <i data-lucide="history" class="w-7 h-7 text-gray-400"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">No investment history</h4>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Your completed and running investments will appear here.</p>
+                            </div>
+                            <div id="investment-history-table" class="hidden">
+                                <!-- Mobile Cards -->
+                                <div id="investment-history-mobile" class="block lg:hidden space-y-4"></div>
+                                <!-- Desktop Table -->
+                                <div class="hidden lg:block bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 overflow-hidden">
+                                    <div data-responsive-table class="overflow-x-auto">
+                                        <table class="w-full">
+                                            <thead class="bg-gray-50 dark:bg-gray-700/60">
+                                                <tr>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Bot</th>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Amount</th>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Profit</th>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Started</th>
+                                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="investment-history-tbody" class="divide-y divide-gray-100 dark:divide-gray-700"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Banner -->
+                        <div class="mt-10 p-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/40 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-800/50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="info" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-1">How Bot Trading Works</p>
+                                <p class="text-sm text-blue-700 dark:text-blue-300/80">Select a bot, choose your investment amount within the allowed range, and the AI handles the rest. Profits are credited to your account at the end of each cycle. All strategies include built-in risk management.</p>
+                            </div>
+                            <a href="support.html" class="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+                                <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                Learn More
+                            </a>
+                        </div>
+
+                    </div><!-- /container -->
+                </div><!-- /Main Content Area -->
+
+            </div><!-- /min-h-screen -->
+
+            <!-- Filter Button Styles -->
+            <style>
+                .filter-btn { background: rgb(243 244 246); color: rgb(75 85 99); }
+                .dark .filter-btn { background: rgb(31 41 55); color: rgb(156 163 175); }
+                .filter-btn:hover, .filter-btn.active { background: rgb(37 99 235); color: white; }
+                .dark .filter-btn:hover, .dark .filter-btn.active { background: rgb(37 99 235); color: white; }
+                @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+            </style>
+
+            <!-- Filtering is handled by bot-trading-ui.js after cards render -->
+
+        </div><!-- /flex-1 -->
+        
+                <!-- Modern Mobile Navigation with Glassmorphism -->
+
+        <link href="https://unpkg.com/lucide@latest" rel="stylesheet">
+
+
+
+        <div data-responsive-bottom-bar class="fixed bottom-0 w-full z-30 lg:hidden" x-data="{ fabOpen: false }" x-cloak>
+
+            <!-- Bottom Navigation Bar with Glassmorphism -->
+
+            <div class="flex justify-between items-center bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg px-6 py-4 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] relative border-t border-gray-200/20 dark:border-gray-700/20">
+
+                <!-- Language Selector (Mobile) -->
+
+                <div class="group flex flex-col items-center relative">
+
+                    <div class="relative">
+
+                        <div class="gtranslate_wrapper_mobile_nav"></div>
+
+                        <style>
+                            .gtranslate_wrapper_mobile_nav {
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper {
+                                position: static !important;
+                                transform: none !important;
+                                background: transparent !important;
+                                box-shadow: none !important;
+                                border: none !important;
+                                border-radius: 0 !important;
+                                width: auto !important;
+                                height: auto !important;
+                                display: flex !important;
+                                flex-direction: column !important;
+                                align-items: center !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper a {
+                                background: transparent !important;
+                                border: none !important;
+                                box-shadow: none !important;
+                                display: flex !important;
+                                flex-direction: column !important;
+                                align-items: center !important;
+                                text-decoration: none !important;
+                                transition: all 0.2s ease !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper a:hover {
+                                transform: scale(1.05) !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper img {
+                                width: 24px !important;
+                                height: 24px !important;
+                                border-radius: 4px !important;
+                                margin: 0 !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options {
+                                position: fixed !important;
+                                bottom: 80px !important;
+                                left: 50% !important;
+                                transform: translateX(-50%) !important;
+                                background: white !important;
+                                border: 1px solid #e5e7eb !important;
+                                border-radius: 12px !important;
+                                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+                                z-index: 1000 !important;
+                                max-height: 300px !important;
+                                overflow-y: auto !important;
+                                width: 280px !important;
+                                max-width: 90vw !important;
+                            }
+
+                            .dark .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options {
+                                background: #374151 !important;
+                                border-color: #4b5563 !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options a {
+                                padding: 8px 12px !important;
+                                display: flex !important;
+                                align-items: center !important;
+                                flex-direction: row !important;
+                                gap: 8px !important;
+                                color: #374151 !important;
+                                font-size: 14px !important;
+                                border-bottom: 1px solid #f3f4f6 !important;
+                            }
+
+                            .dark .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options a {
+                                color: #f9fafb !important;
+                                border-bottom-color: #4b5563 !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options a:hover {
+                                background: #f3f4f6 !important;
+                                transform: none !important;
+                            }
+
+                            .dark .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options a:hover {
+                                background: #4b5563 !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options a:last-child {
+                                border-bottom: none !important;
+                            }
+
+                            .gtranslate_wrapper_mobile_nav .gt_float_wrapper .gt_options img {
+                                width: 20px !important;
+                                height: 20px !important;
+                            }
+                        </style>
+
+                        <script>
+                            if (!window.gtranslateSettingsMobileNav) {
+
+                                window.gtranslateSettingsMobileNav = {
+
+                                    "default_language": "en",
+
+                                    "wrapper_selector": ".gtranslate_wrapper_mobile_nav",
+
+                                    "flag_style": "3d",
+
+                                    "alt_flags": {
+                                        "en": "usa"
+                                    },
+
+                                    "switcher_horizontal_position": "center",
+
+                                    "switcher_vertical_position": "bottom"
+
+                                };
+
+
+
+                                // Load script for mobile nav if not already loaded
+
+                                var script = document.createElement('script');
+
+                                script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
+
+                                script.defer = true;
+
+                                document.head.appendChild(script);
+
+                            }
+                        </script>
+
+
+
+                        <i data-lucide="globe" class="w-6 h-6 text-gray-500 group-hover:text-blue-600 transition-colors duration-200"></i>
+
+                    </div>
+
+                    <span class="text-xs mt-1 text-gray-500 group-hover:text-blue-600">Language</span>
+
+                </div>
+
+
+
+                <a href="deposits.html" class="group flex flex-col items-center relative">
+
+                    <div class="p-2 rounded-xl transition-all duration-300 ease-out
+
+                  hover:bg-gray-100 dark:hover:bg-gray-800">
+
+                        <i data-lucide="banknote" class="w-6 h-6
+
+           text-gray-500 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-400
+
+           transition-colors duration-300"></i>
+
+                    </div>
+
+                    <span class="text-xs font-medium mt-1
+
+            text-gray-500 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-400
+
+            transition-colors duration-300">Deposit</span>
+
+                </a>
+
+
+
+                <a href="account-settings.html" class="group flex flex-col items-center relative">
+
+                    <div class="p-2 rounded-xl transition-all duration-300 ease-out
+
+                  hover:bg-gray-100 dark:hover:bg-gray-800">
+
+                        <i data-lucide="user" class="w-6 h-6
+
+           text-gray-500 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-400
+
+           transition-colors duration-300"></i>
+
+                    </div>
+
+                    <span class="text-xs font-medium mt-1
+
+            text-gray-500 group-hover:text-blue-600 dark:text-gray-400 dark:group-hover:text-blue-400
+
+            transition-colors duration-300">Profile</span>
+
+                </a>
+
+
+
+                <!-- Animated FAB Button -->
+
+                <button @click="fabOpen = !fabOpen" class="absolute -top-7 left-1/2 transform -translate-x-1/2
+
+                   bg-gradient-to-r from-blue-600 to-indigo-600 text-white
+
+                   w-14 h-14 rounded-full flex items-center justify-center
+
+                   shadow-[0_8px_30px_rgba(59,130,246,0.5)]
+
+                   border-4 border-white dark:border-gray-900
+
+                   hover:scale-110 hover:shadow-[0_8px_35px_rgba(59,130,246,0.6)]
+
+                   active:scale-95
+
+                   transition-all duration-300 ease-out">
+
+      <i data-lucide="zap" class="w-6 h-6 transform transition-transform group-hover:scale-110"></i>
+
+      <!-- Pulse Effect -->
+
+      <span class="absolute w-full h-full rounded-full bg-blue-500 animate-ping opacity-20"></span>
+
+    </button>
+
+
+
+                <a href="support.html" class="flex flex-col items-center
+
+          text-gray-500
+
+          hover:text-blue-600">
+
+  <i data-lucide="life-buoy" class="w-6 h-6"></i>
+
+  <span class="text-xs mt-1">Support</span>
+
+</a>
+
+
+
+
+
+
+
+                <a href="../dashboard.html" class="flex flex-col items-center
+
+          text-gray-500 hover:text-blue-600">
+
+ <i data-lucide="home" class="w-6 h-6 transition-colors duration-200"></i>
+
+  <span class="text-xs mt-1">Home</span>
+
+</a>
+
+            </div>
+
+
+
+            <!-- Modern FAB Overlay Menu -->
+
+            <div data-responsive-modal x-show="fabOpen" @click.away="fabOpen = false" class="fixed inset-0 bg-gray-900/70 backdrop-blur-sm z-40 flex items-center justify-center p-4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+
+
+
+                <!-- Menu Card -->
+
+                <div data-responsive-modal-card class="bg-gray-900 p-6 rounded-2xl
+
+                shadow-[0_8px_30px_rgba(0,0,0,0.3)]
+
+                space-y-4 w-72 max-w-full
+
+                border border-gray-700
+
+                transform transition-all duration-300
+
+                animate-slideUp">
+
+
+
+                    <!-- Quick Actions Grid -->
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+
+                        <a href="trade.html" class="flex flex-col items-center p-4 rounded-xl
+
+                  bg-gray-800 border border-gray-700
+
+                  hover:bg-gray-700 hover:shadow-lg hover:scale-105 transition-all duration-300
+
+                  group">
+
+          <i data-lucide="trending-up" class="w-6 h-6 mb-2 text-blue-400
+
+                                              group-hover:scale-110 transition-transform duration-300"></i>
+
+          <span class="text-sm font-medium text-gray-200">Trade</span>
+
+        </a>
+
+
+
+                        <a href="withdrawals.html" class="flex flex-col items-center p-4 rounded-xl
+
+                  bg-gray-800 border border-gray-700
+
+                  hover:bg-gray-700 hover:shadow-lg hover:scale-105 transition-all duration-300
+
+                  group">
+
+          <i data-lucide="wallet" class="w-6 h-6 mb-2 text-green-400
+
+                                       group-hover:scale-110 transition-transform duration-300"></i>
+
+          <span class="text-sm font-medium text-gray-200">Withdraw</span>
+
+        </a>
+
+                    </div>
+
+
+
+                    <!-- Menu Links -->
+
+                    <div class="space-y-2">
+
+
+
+
+
+
+
+
+
+                        <a href="support.html" class="flex items-center p-3 rounded-lg text-gray-100
+
+                          hover:bg-gray-800
+
+                          transition-colors duration-200 group">
+
+          <i data-lucide="users" class="w-5 h-5 mr-3 text-orange-400
+
+                                      group-hover:scale-110 transition-transform duration-300"></i>
+
+          <span class="font-medium">Refer Friends</span>
+
+          <span class="ml-auto text-xs font-bold text-orange-400">+10%</span>
+
+        </a>
+
+
+
+                        <a href="support.html" class="flex items-center p-3 rounded-lg text-gray-100
+
+                                               hover:bg-gray-800
+
+                                               transition-colors duration-200 group">
+
+          <i data-lucide="life-buoy" class="w-5 h-5 mr-3 text-cyan-400
+
+                                           group-hover:scale-110 transition-transform duration-300"></i>
+
+          <span class="font-medium">Support</span>
+
+        </a>
+
+
+
+                        <a href="/dashboard/bot-trading.html" class="flex items-center p-3 rounded-lg text-gray-100
+
+                          hover:bg-gray-800
+
+                          transition-colors duration-200 group">
+
+          <i data-lucide="newspaper" class="w-5 h-5 mr-3 text-indigo-400
+
+                                          group-hover:scale-110 transition-transform duration-300"></i>
+
+          <span class="font-medium">Bots Trading</span>
+
+        </a>
+
+                    </div>
+
+
+
+                    <!-- Close Button -->
+
+                    <button @click="fabOpen = false" class="absolute top-2 right-2 p-2 rounded-full
+
+                     text-gray-400 hover:text-gray-200
+
+                     hover:bg-gray-800
+
+                     transition-colors duration-200">
+
+        <i data-lucide="x" class="w-5 h-5"></i>
+
+      </button>
+
+                </div>
+
+            </div>
+
+
+
+            <style>
+                @keyframes slideUp {
+                    from {
+                        opacity: 0;
+                        transform: scale(0.95) translateY(10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1) translateY(0);
+                    }
+                }
+
+                .animate-slideUp {
+                    animation: slideUp 0.3s ease-out forwards;
+                }
+            </style>
+
+        </div>
+
+
+
+        <!-- Script for Lucide Icons -->
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+        <script>
+            // Initialize Lucide icons
+
+            document.addEventListener('DOMContentLoaded', function() {
+
+                lucide.createIcons();
+
+            });
+
+
+
+            // Re-initialize icons when Alpine renders new content
+
+            document.addEventListener('alpine:init', () => {
+
+                Alpine.nextTick(() => {
+
+                    lucide.createIcons();
+
+                });
+
+            });
+        </script>
+
+
+
+        <style>
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            .animate-fadeIn {
+                animation: fadeIn 0.3s ease-out;
+            }
+        </style>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://unpkg.com/lucide@latest"></script>
+
+
+
+        <!-- Live Crypto Prices Script -->
+
+        <script>
+            // Alpine.js component for live crypto prices
+
+            function cryptoPrices() { return window.XytrionApp.cryptoPrices(); }
+
+
+
+            // Initialize when Alpine is ready
+
+            document.addEventListener('alpine:init', () => {
+
+                // Register the component globally
+
+                Alpine.data('cryptoPrices', cryptoPrices);
+
+            });
+        </script>
+
+
+
+
+
+
+
+
+    <script>
+        // Initialize user profile on page load
+        window.addEventListener('xytrion:user', function(event) {
+            // The server session, not a browser cache, determines authentication.
+            const currentUser = event.detail;
+            // Hydrate user data
+            const fullName = currentUser.name || currentUser.username || 'User';
+            const initial = fullName.charAt(0).toUpperCase();
+            const balance = Number(currentUser.balance || 0).toFixed(2);
+            const kycStatus = localStorage.getItem('kyc_status') || currentUser.kyc_status || 'unverified';
+
+            // Set name placeholders
+            document.querySelectorAll('.user-name-text').forEach(el => el.textContent = fullName);
+            document.querySelectorAll('.user-initial-text').forEach(el => el.textContent = initial);
+            refreshBalanceUI();
+            document.querySelectorAll('[data-user-name]').forEach(el => el.textContent = fullName);
+            document.querySelectorAll('[data-user-initials]').forEach(el => el.textContent = fullName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2));
+            refreshBalanceUI();
+            document.querySelectorAll('[data-user-welcome]').forEach(el => el.textContent = 'Welcome back, ' + fullName + '!');
+
+            // KYC badge
+            document.querySelectorAll('[data-kyc-badge]').forEach(el => {
+                if (kycStatus === 'verified') el.textContent = 'Verified';
+                else if (kycStatus === 'under_review') el.textContent = 'Under Review';
+                else el.textContent = 'Unverified';
+            });
+
+            // KYC status display element (for telegram.js)
+            const kycEl = document.getElementById('kyc-status-display');
+            if (kycEl) {
+                if (kycStatus === 'verified') {
+                    kycEl.innerHTML = '<span class="px-3 py-1 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-xs font-medium">Verified</span>';
+                } else if (kycStatus === 'under_review') {
+                    kycEl.innerHTML = '<span class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full text-xs font-medium">Under Review</span>';
+                } else {
+                    kycEl.innerHTML = '<span class="px-3 py-1 bg-gray-500/20 text-gray-400 border border-gray-500/30 rounded-full text-xs font-medium">Unverified</span>';
+                }
+            }
+        });
+
+    </script>
+    <!-- User Session & Profile Initialization -->
+    <script src="/assets/js/app.js"></script>
+    <script src="user-session.js?v=20261021-balance-withdraw"></script>
+    <script src="telegram.js"></script>
+    <script src="auth.js"></script>
+    <script src="investments.js"></script>
+    <script src="bot-trading-ui.js"></script>
+    <script>
+        if (!requireLogin()) {
+            // User is not logged in, will be redirected
+        } else {
+            hydrateUserProfile();
+        }
+    </script>
+    <!-- Shared Live Chat Widget -->
+    <script src="/assets/js/notifications.js" defer></script>
+    <script src="/dashboard/chat-widget.js" defer></script>
+</body>
+
+</html>
